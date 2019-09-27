@@ -22,7 +22,7 @@ LOG_FILE = "#{PATH}/.schnitzel.log"
 ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 
 # Location of the prepared tar
-CHAOS_URL = "https://smits-net.de/files/ei/chaos.tar.xz"
+CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
 
 # Some "arbitrary" file names
 FILENAMES=[
