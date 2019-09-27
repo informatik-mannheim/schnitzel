@@ -7,7 +7,7 @@ require 'fileutils'
 TEMP_PATH = "/tmp/chaos"
 
 # Files to package into the chaos folder
-INCLUDE = %w{ kafka1.txt kafka2.txt wortliste.txt}
+INCLUDE = %w{ files/kafka1.txt files/kafka2.txt files/wortliste.txt}
 
 # The secret to be included into one file
 SECRET = '#parmigiana4life#'
