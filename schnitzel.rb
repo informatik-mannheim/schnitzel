@@ -16,7 +16,7 @@ PROJEKT_PATH = "linux-kurs"
 PATH = "#{BASE_PATH}/#{PROJEKT_PATH}"
 
 # File to log the progress
-LOG_FILE = "#{PATH}/kurs.log"
+LOG_FILE = "#{PATH}/.schnitzel.log"
 
 # Text ot ask for <ENTER>
 ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
@@ -52,6 +52,26 @@ FILENAMES=[
   'Yakuza',
   'Zork',
 ]
+
+# ------------
+# OS dependencies
+# ------------
+
+if RUBY_PLATFORM =~ /linux/
+  # Linux
+  STAT_USER = 'stat -c %U'
+  STAT_PERMISSIONS = 'stat -c %a'
+  STAT_LINK_COUNT = 'stat -c %h'
+elsif RUBY_PLATFORM =~ /darwin/
+  # MacOS
+  STAT_USER = 'stat -f %Su'
+  STAT_PERMISSIONS = 'stat -f %Lp'
+  STAT_LINK_COUNT = 'stat -f %l'
+else
+  # Unknown OS
+  puts "Unknown operating system. Exiting..."
+  exit 1
+end
 
 # ------------
 # Classes
@@ -400,7 +420,7 @@ exercises << Exercise.new(
     },
     :enter,
     'sudo chown nobody shady-business',
-    -> () { `stat -c %U #{PATH}/shady-business`.strip == 'nobody' },
+    -> () { `#{STAT_USER} #{PATH}/shady-business`.strip == 'nobody' },
     -> () { mkdir("#{PATH}/shady-business"); fill_dir("#{PATH}/shady-business") }
 )
 
@@ -429,7 +449,7 @@ exercises << Exercise.new(
     },
     :enter,
     'sudo chmod og+rwx nothing-to-see-here',
-    -> () { p = `stat -c %a #{PATH}/nothing-to-see-here`.strip; p == '777' || p == '707' }
+    -> () { p = `#{STAT_PERMISSIONS} #{PATH}/nothing-to-see-here`.strip; p == '777' || p == '707' }
 )
 
 # rm -rf
@@ -548,7 +568,7 @@ exercises << Exercise.new(
     },
     :enter,
     'cd chaos; sort wortliste.txt | uniq > ../wortliste_sortiert.txt',
-    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exists?(f) && File.readlines(f)[142].strip == 'ausbauchen' }
+    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exists?(f) && (File.readlines(f)[142].strip == 'ausbauchen' || File.readlines(f)[142].strip == 'Behelfsverkaufsstelle') }
 )
 
 # grep / sed / | / >
@@ -587,7 +607,7 @@ exercises << Exercise.new(
     },
     :enter,
     'ln highlander.txt fasil.txt',
-    -> () { f = "#{PATH}/fasil.txt"; File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && `stat -c %h #{f}`.strip == "2" },
+    -> () { f = "#{PATH}/fasil.txt"; File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && `#{STAT_LINK_COUNT} #{f}`.strip == "2" },
     -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
 )
 
