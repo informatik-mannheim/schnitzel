@@ -25,33 +25,9 @@ ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
 
 # Some "arbitrary" file names
-FILENAMES=[
-  'Battlefield',
-  'BioShock',
-  'Borderlands',
-  'Burnout',
-  'Castlevania',
-  'Crysis',
-  'Deponia',
-  'Doom',
-  'Elite',
-  'Fallout',
-  'Halo',
-  'Hitman',
-  'Minecraft',
-  'Payday',
-  'Prey',
-  'Quake',
-  'Rayman',
-  'Risen',
-  'Splatoon',
-  'Thief',
-  'Uncharted',
-  'Witcher',
-  'Wolfenstein',
-  'Yakuza',
-  'Zork',
-]
+FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
+                Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
+                Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
 
 # ------------
 # OS dependencies
