@@ -18,7 +18,7 @@ The game was tested on
 
   * `schnitzel.rb` - Game itself (only file needed on the target machine)
   * `generate_chaos.rb` - Script to generate the file `chaos.tar.xz` that must be downloaded and unpacked by the players.
-  * (files` - files included during the creation of the `chaos.tar.xz`
+  * `files` - files included during the creation of the `chaos.tar.xz`
   * `chaos.tar.xz` - file the students download during the exercise, containing additional material (see [files](files/) folder)
 
 ## Author
