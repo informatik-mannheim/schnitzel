@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 # Interaktive Schnitzeljagd, um die Linux-Konsole kennen zu lernen.
+# Basierend auf einer Idee von Eugen Krizki and Richard Vladimirskij.
+# (c) 2019 Thomas Smits
 
 # ------------
 # Constants
@@ -48,10 +50,6 @@ else
   puts "Unknown operating system. Exiting..."
   exit 1
 end
-
-# ------------
-# Classes
-# ------------
 
 ##
 # Class to store the single exercises to be performed
@@ -109,6 +107,7 @@ class Exercise
     puts green("\nKorrekt. Gut gemacht!\n")
   end
 end
+
 
 # ------------
 # Helper functions
@@ -240,14 +239,15 @@ def log_success(index, exercise)
   end
 end
 
+
 # ------------
 # The exercises
 # ------------
 
-exercises = []
+@exercises = []
 
 # man
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Hilfe',
     'Lernen Sie, sich die Hilfe von Programmen anzeigen zu lassen.',
     %Q{
@@ -261,7 +261,7 @@ exercises << Exercise.new(
 )
 
 # vi / nano
-exercises << Exercise.new(
+@exercises << Exercise.new(
   'Erstkontakt',
   'Lernen Sie in Verzeichnisse zu wechseln (cd) und Dateien zu editieren (vi / nano).',
   %Q{
@@ -276,7 +276,7 @@ exercises << Exercise.new(
 )
 
 # vi / nano
-exercises << Exercise.new(
+@exercises << Exercise.new(
   'Datei editieren',
   'Eine vorhandene Datei mit einem Editor bearbeiten.',
   %Q{
@@ -291,7 +291,7 @@ exercises << Exercise.new(
 )
 
 # less
-exercises << Exercise.new(
+@exercises << Exercise.new(
   'Der Preis eines Schnitzels',
   'Machen Sie sich mit der Funktionsweise von cd, ls, less und more vertraut.',
   %Q{
@@ -308,7 +308,7 @@ exercises << Exercise.new(
 )
 
 # mkdir / cp
-exercises << Exercise.new(
+@exercises << Exercise.new(
   'Life, Death & Taxes',
   'Machen Sie sich mit der Funktionsweise von mkdir und cp vertraut.',
   %Q{
@@ -324,7 +324,7 @@ exercises << Exercise.new(
 )
 
 # mv
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Geld stinkt nicht',
     'Machen Sie sich mit der Funktionsweise von mv vertraut.',
     %Q{
@@ -347,7 +347,7 @@ exercises << Exercise.new(
 )
 
 # rm
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Unter den Teppich kehren',
     'Machen Sie sich mit der Funktionsweise von rm vertraut.',
     %Q{
@@ -361,7 +361,7 @@ exercises << Exercise.new(
 )
 
 # whoami
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Wer bin ich?',
     'Mache Sie sich mit der Funktionsweise von whoami vertraut.',
     %Q{
@@ -373,7 +373,7 @@ exercises << Exercise.new(
 )
 
 # ls -axl
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Wem gehört denn das?',
     'Vertiefen Sie Ihr Wissen zu ls.',
     %Q{
@@ -388,7 +388,7 @@ exercises << Exercise.new(
 )
 
 # sudo / chown
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'What a Superuser can do',
     'Machen Sie sich mit der Funktionsweise von sudo und chown vertraut.',
     %Q{
@@ -401,7 +401,7 @@ exercises << Exercise.new(
 )
 
 # mv
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Move on...there is nothing to see here',
     'Frischen Sie Ihr Wissen zu mv ein wenig auf.',
     %Q{
@@ -415,7 +415,7 @@ exercises << Exercise.new(
 )
 
 # chmod
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Read, Write and Execute',
     'Machen Sie sich mit der Funktionsweise von chmod vertraut.',
     %Q{
@@ -429,7 +429,7 @@ exercises << Exercise.new(
 )
 
 # rm -rf
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Ist das Kunst, oder kann das weg?',
     'Frischen Sie Ihr Wissen zu rm ein wenig auf.',
     %Q{
@@ -443,7 +443,7 @@ exercises << Exercise.new(
 )
 
 # wget
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Ein neues Kapitel',
     'Mache Sie sich mit der Funktionsweise von wget vertraut.',
     %Q{
@@ -459,7 +459,7 @@ exercises << Exercise.new(
 )
 
 # tar
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Archive',
     'Machen Sie sich mit der Funktionsweise von tar vertraut.',
     %Q{
@@ -473,7 +473,7 @@ exercises << Exercise.new(
 )
 
 # find / wc
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Find what you search for',
     'Mache Sie sich mit der Funktionsweise von find vertraut.',
     %Q{
@@ -486,23 +486,9 @@ exercises << Exercise.new(
     -> () { input.to_i == 32771 }
 )
 
-=begin
-exercises << Exercise.new(
-    'Build a Pipeline',
-    'Mache Sie sich mit der Funktionsweise von find, wc und der Pipe ("|") vertraut.',
-    %Q{
-      Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in "#{PROJEKT_PATH}/chaos" gespeichert sind.
-
-      Erstellen Sie eine Pipeline, die alle .txt-Dateien im "chaos"-Ordner, deren Inhalt ausgibt und anschließend die Zeilen zählt.
-    },
-    'Tragen Sie hier ein, wieviele Zeilen die .txt-Dateien in Summe haben:',
-    '',
-    -> () { input.to_i == 42 }
-)
-=end
 
 # grep
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Find the key',
     'Machen Sie sich mit der Funktionsweise von grep vertraut.',
     %Q{
@@ -520,7 +506,7 @@ exercises << Exercise.new(
 )
 
 # diff
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Find the difference',
     'Machen Sie sich mit der Funktionsweise von diff vertraut.',
     %Q{
@@ -534,7 +520,7 @@ exercises << Exercise.new(
 )
 
 # sort / uniq / > / |
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Sortieren und ordnen',
     'Machen Sie sich mit der Funktionsweise von sort, uniq und der Ausgabeumleitung (<,>,|) vertraut.',
     %Q{
@@ -548,7 +534,7 @@ exercises << Exercise.new(
 )
 
 # grep / sed / | / >
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Monnheim',
     'Machen Sie sich mit der Funktionsweise von grep, sed und der Ausgabeumleitung (<,>,|) vertraut.',
     %Q{
@@ -562,7 +548,7 @@ exercises << Exercise.new(
 )
 
 # ln -s
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Was heißt hier Softie?',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
@@ -575,7 +561,7 @@ exercises << Exercise.new(
 )
 
 # ln
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Nur die Harten kommen in den Garten',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
@@ -588,7 +574,7 @@ exercises << Exercise.new(
 )
 
 # ps / kill
-exercises << Exercise.new(
+@exercises << Exercise.new(
     'Vertrauen ist nichts, Kontrolle ist alles',
     'Machen Sie sich mit der Funktionsweise "ps" und "kill" vertraut.',
     %Q{
@@ -600,24 +586,6 @@ exercises << Exercise.new(
     -> () { p = fork { exec "sleep 100000" }; Process.detach(p) }
 )
 
-=begin
-exercises << Exercise.new(
-    'Get the Parrot',
-    'Mache dich mit der Funktionsweise von gpg vertraut.',
-    %Q{
-      Du hast eine verschlüsselte Datei, die mit dem eben gefundenen Passwort verschlüsselt wurde. Um die Datei zu lesen, musst du sie vorher entschlüsseln.
-
-      Navigiere in den Ordner #{PROJEKT_PATH}/chaos und betrachte die Datei "papagei.txt.gpg" mit Hilfe von nano.
-
-      Entschlüssele die Datei mit dem Befehl [gpg -d papagei.txt.gpg] (ohne die Klammern).
-
-      Der Inhalt der verschlüsselten Datei wird auf dem Bildschirm ausgegeben.
-    },
-    '',
-    'Trage hier den Inhalt der verschlüsselten Datei ein:',
-    -> () { $stdin.gets.chomp == '42' }
-)
-=end
 
 start = next_exercise
 
@@ -628,14 +596,14 @@ if ARGV[0]
 end
 
 # Execute the exercises
-exercises.each_with_index do |exercise, index|
+@exercises.each_with_index do |exercise, index|
 
   # Skip already finished exercises
   next if index < start
 
   # Execute the exercise and log success
   puts "#{cls}"
-  print progress_bar(exercises.length, index, 70)
+  print progress_bar(@exercises.length, index, 70)
   print "\n\n"
   exercise.execute
   log_success(index, exercise)
@@ -644,7 +612,7 @@ exercises.each_with_index do |exercise, index|
 end
 
 puts "#{cls}"
-print progress_bar(exercises.length, exercises.length, 70)
+print progress_bar(@exercises.length, @exercises.length, 70)
 puts green(%q{
  _    _  _                             _    _  _
 | |  | |(_)                           | |  | |(_)
