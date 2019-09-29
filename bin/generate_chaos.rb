@@ -7,7 +7,7 @@ require 'fileutils'
 TEMP_PATH = "/tmp/chaos"
 
 # Files to package into the chaos folder
-INCLUDE = %w{ files/kafka1.txt files/kafka2.txt files/wortliste.txt}
+INCLUDE = %w{ ../files/kafka1.txt ../files/kafka2.txt ../files/wortliste.txt}
 
 # The secret to be included into one file
 SECRET = '#parmigiana4life#'
@@ -109,10 +109,11 @@ INCLUDE.each { |src| FileUtils.cp(src, TEMP_PATH) }
 # Package folder
 puts "Packaging"
 `cd #{TEMP_PATH}/.. && tar cfJ chaos.tar.xz chaos`
-FileUtils.mv("#{TEMP_PATH}/../chaos.tar.xz", ".")
+FileUtils.mv("#{TEMP_PATH}/../chaos.tar.xz", "../")
 
 # Remove temporary files
 puts "Removing generated files"
 
 puts "Done"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
+
