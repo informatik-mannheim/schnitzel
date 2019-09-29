@@ -3,7 +3,7 @@
     'Was heißt hier Softie?',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
-      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen Softlink (symbolischer Link) namens `macleod.txt` auf diese Datei.
+      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen _Softlink_ (symbolischer Link) namens `macleod.txt` auf diese Datei.
     },
     :enter,
     'ln -s highlander.txt macleod.txt',

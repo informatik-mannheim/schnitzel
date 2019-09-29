@@ -36,7 +36,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def red(txt)
-  "\033[0;31m#{txt}\033[0m"
+  "\033[1;31m#{txt}\033[0m"
 end
 
 ##
@@ -44,7 +44,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def green(txt)
-  "\033[0;32m#{txt}\033[0m"
+  "\033[32m#{txt}\033[0m"
 end
 
 ##
@@ -52,7 +52,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def blue(txt)
-  "\033[0;34m#{txt}\033[0m"
+  "\033[34m#{txt}\033[0m"
 end
 
 ##
@@ -60,7 +60,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def yellow(txt)
-  "\033[1;33m#{txt}\033[0m"
+  "\033[33m#{txt}\033[0m"
 end
 
 ##
@@ -68,7 +68,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def grey(txt)
-  "\033[1;30m#{txt}\033[0m"
+  "\033[30m#{txt}\033[0m"
 end
 
 ##
@@ -77,6 +77,14 @@ end
 # @return String the formatted text
 def bold(txt)
   "\033[1m#{txt}\033[0m"
+end
+
+##
+# Format the text for an ANSI terminal in underline
+# @param txt String the text to be formatted
+# @return String the formatted text
+def underline(txt)
+  "\033[4m#{txt}\033[0m"
 end
 
 ##
@@ -129,7 +137,7 @@ def log_success(index, exercise)
 end
 
 ##
-# Highlight words in ` ` in the given string using ANSI escape sequences
+# Highlight words in ` ` and _ _ in the given string using ANSI escape sequences
 # @param input String the input
 # @return String the input with highlights
 def highlight(input)
@@ -137,6 +145,11 @@ def highlight(input)
   while result =~ /(.*)`(.*?)`(.*)/m # multiline match (m)
     result = "#{$1}#{bold($2)}#{$3}"
   end
+
+  while result =~ /(.*)_(.*?)_(.*)/m # multiline match (m)
+    result = "#{$1}#{underline($2)}#{$3}"
+  end
+
   result
 end
 
@@ -151,7 +164,7 @@ def fit(input, width)
   result = ''
   line_length = 0
   words.each_with_index do |w, i|
-    line_length += w.gsub(/`/, '').length # don't count `
+    line_length += w.gsub(/`/, '').gsub(/_/, '').length # don't count ` and _
     if line_length > width
       # line full, start a new line
       result << "\n"

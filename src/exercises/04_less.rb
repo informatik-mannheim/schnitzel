@@ -7,7 +7,7 @@
 
     Zum Glück haben Sie die Speisekarte in der Datei `speisekarte.txt` im `#{PROJEKT_PATH}`-Ordner gespeichert.
 
-    Schaue Sie in der Datei nach dem Preis für ein Wiener-Schnitzel.
+    Schaue Sie in der Datei nach dem _Preis für ein Wiener-Schnitzel_.
   },
   'Welchen Preis hat das Wiener Schnitzel?',
   'less speisekarte.txt',

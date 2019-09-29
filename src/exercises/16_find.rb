@@ -5,7 +5,7 @@
     %Q{
       Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in `#{PROJEKT_PATH}/chaos` gespeichert sind.
 
-      Finden Sie alle .txt-Dateien im `chaos`-Ordner (und den Unterordnern).
+      Finden Sie _alle_ .txt-Dateien im `chaos`-Ordner (und den Unterordnern).
     },
     'Trage hier ein, wieviele .txt-Dateien im Ordner vorhanden sind:',
     'find chaos/ -name "*.txt" | wc',

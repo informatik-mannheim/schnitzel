@@ -9,7 +9,7 @@
 
       Navigieren Sie in den Ordner `#{PROJEKT_PATH}/chaos`.
 
-      Nutzen Sie grep, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist `#.*#`).
+      Nutzen Sie `grep`, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist `#.*#`).
     },
     'Wie lautet das magische Passwort (ohne die #)?',
     'grep -roh "#.*#"',

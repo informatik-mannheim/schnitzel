@@ -5,7 +5,7 @@
     %Q{
       Die Dokumente wurden in einem Archiv gespeichert, um sie kompakt und gebündelt zu verwalten.
 
-      Entpacken Sie das heruntergeladene Archiv in den Ordner `#{PROJEKT_PATH}`.
+      _Entpacken_ Sie das heruntergeladene Archiv in den Ordner `#{PROJEKT_PATH}`.
     },
     :enter,
     'tar -xJf chaos.tar.xz',

@@ -3,7 +3,7 @@
     'Nur die Harten kommen in den Garten',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
-      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen Hardlink namens `fasil.txt` auf diese Datei.
+      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen _Hardlink_ namens `fasil.txt` auf diese Datei.
 
       Öffnen Sie nun `fasil.txt` in einem Texteditor und ändern Sie den Inhalt zu `"Es kann nur zwei geben!"` und speichern Sie den Inhalt. Sehen Sie sich danach die Datei `highlander.txt` an.
     },

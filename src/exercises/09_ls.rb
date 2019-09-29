@@ -5,7 +5,7 @@
     %Q{
       Sie verwalten Dateien zu zwielichtigen Geschäften im Ordner `shady-business` im `#{PROJEKT_PATH}`-Verzeichnis.
 
-      Finden Sie heraus, welcher Benutzer der Besitzer des Ordners `shady-business` ist.
+      Finden Sie heraus, welcher Benutzer der _Besitzer des Ordners_ `shady-business` ist.
     },
     'Trage Sie hier den Namen des Besitzers ein:',
     'ls -axl',

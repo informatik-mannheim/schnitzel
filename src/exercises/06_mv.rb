@@ -5,7 +5,7 @@
     %Q{
       Ihr Steuerberater braucht noch weitere Unterlagen, die alle im Ordner `#{PROJEKT_PATH}/laundry` liegen.
 
-      Bewegen Sie den Ordner `laundry`, samt seines Inhaltes, in das `tax-man`-Verzeichnis in `#{PROJEKT_PATH}`.
+      _Bewegen_ Sie den Ordner `laundry`, samt seines Inhaltes, in das `tax-man`-Verzeichnis in `#{PROJEKT_PATH}`.
     },
     :enter,
     'mv laundry tax-man',

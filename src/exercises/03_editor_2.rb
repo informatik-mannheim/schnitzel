@@ -5,7 +5,7 @@
   %Q{
     Sie möchten eine Datei mit Lieblingsfilmen von jemand anderem editieren.
 
-    Gehen Sie in das Verzeichnis `#{PROJEKT_PATH}` und editieren Sie die Datei `prof-filme.txt`, die dort liegt. Entfernen Sie den Film "Blade Runner", den Sie (unverständlicherweise) persönlich nicht mögen.
+    Gehen Sie in das Verzeichnis `#{PROJEKT_PATH}` und editieren Sie die Datei `prof-filme.txt`, die dort liegt. _Entfernen_ Sie den Film "_Blade Runner_", den Sie (unverständlicherweise) persönlich nicht mögen.
   },
   :enter,
   'vi prof-filme.txt; J DD :w :q',
