@@ -8,6 +8,9 @@
 # Constants
 # ------------
 
+# Width of the terminal
+LINE_WIDTH = 80
+
 # Base path to all our files
 BASE_PATH = "#{Dir.home}"
 
@@ -101,7 +104,7 @@ end
 
   # Execute the exercise and log success
   puts "#{cls}"
-  print progress_bar(@exercises.length, index, 70)
+  print progress_bar(@exercises.length, index, LINE_WIDTH - 8)
   print "\n\n"
   exercise.execute
   log_success(index, exercise)
@@ -110,7 +113,7 @@ end
 end
 
 puts "#{cls}"
-print progress_bar(@exercises.length, @exercises.length, 70)
+print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
 puts green(%q{
  _    _  _                             _    _  _
 | |  | |(_)                           | |  | |(_)

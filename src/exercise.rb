@@ -34,7 +34,20 @@ class Exercise
     @setup.call if @setup
     puts "#{red(@title)}\n\n"
     puts "#{yellow(@purpose)}\n\n"
-    puts %Q{#{highlight(@task).strip.split("\n").map(&:strip).join("\n")}\n\n}
+
+    # allow free formatting of the text in the input, Remove
+    # leading blanks
+    task_text = @task.strip.split("\n").map(&:strip)
+
+    # ensure that on the terminal no newline appears in the middle of
+    # a word
+    task_text.map! { |line| fit(line, LINE_WIDTH) }
+
+    # highlight keywords
+    task_text.map! { |line| highlight(line) }
+
+    # print the text
+    puts %Q{#{task_text.join("\n")}\n\n}
 
     begin
       if @input_message == :enter

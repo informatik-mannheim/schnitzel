@@ -139,3 +139,29 @@ def highlight(input)
   end
   result
 end
+
+##
+# Break the text in a way that it fits on the given witdh
+# without having a break in the middle of a word.
+# @param input String the text
+# @param width Integer the width
+# @return String the text with additional newlines
+def fit(input, width)
+  words = input.split(' ')
+  result = ''
+  line_length = 0
+  words.each_with_index do |w, i|
+    line_length += w.gsub(/`/, '').length # don't count `
+    if line_length > width
+      # line full, start a new line
+      result << "\n"
+      line_length = w.length
+    elsif i > 0
+      # not the firs word, add a blank
+      result << ' '
+      line_length += 1
+    end
+    result << w
+  end
+  result
+end
