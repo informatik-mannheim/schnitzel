@@ -3,9 +3,9 @@
     'Geld stinkt nicht',
     'Machen Sie sich mit der Funktionsweise von mv vertraut.',
     %Q{
-      Ihr Steuerberater braucht noch weitere Unterlagen, die alle im Ordner "#{PROJEKT_PATH}/laundry" liegen.
+      Ihr Steuerberater braucht noch weitere Unterlagen, die alle im Ordner `#{PROJEKT_PATH}/laundry` liegen.
 
-      Bewegen Sie den Ordner "laundry", samt seines Inhaltes, in das "tax-man"-Verzeichnis in "#{PROJEKT_PATH}".
+      Bewegen Sie den Ordner `laundry`, samt seines Inhaltes, in das `tax-man`-Verzeichnis in `#{PROJEKT_PATH}`.
     },
     :enter,
     'mv laundry tax-man',

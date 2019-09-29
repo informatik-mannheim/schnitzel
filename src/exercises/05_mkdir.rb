@@ -5,9 +5,9 @@
   %Q{
     Der Steuerberater Ihres Restaurants braucht ein paar Unterlagen von Ihnen.
 
-    Erstelle für ihn einen Ordner "tax-man" im "#{PROJEKT_PATH}"-Verzeichnis.
+    Erstelle für ihn einen Ordner `tax-man` im `#{PROJEKT_PATH}`-Verzeichnis.
 
-    Kopieren Sie die Datei "speisekarte.txt" aus dem "#{PROJEKT_PATH}"-Verzeichnis in das "tax-man" Verzeichnis.
+    Kopieren Sie die Datei `speisekarte.txt` aus dem `#{PROJEKT_PATH}`-Verzeichnis in das `tax-man` Verzeichnis.
    },
    :enter,
    'mkdir tax-man; cp speisekarte.txt tax-man/',

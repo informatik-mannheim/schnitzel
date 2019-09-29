@@ -34,7 +34,7 @@ class Exercise
     @setup.call if @setup
     puts "#{red(@title)}\n\n"
     puts "#{yellow(@purpose)}\n\n"
-    puts %Q{#{@task.strip.split("\n").map(&:strip).join("\n")}\n\n}
+    puts %Q{#{highlight(@task).strip.split("\n").map(&:strip).join("\n")}\n\n}
 
     begin
       if @input_message == :enter

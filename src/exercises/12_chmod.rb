@@ -5,7 +5,7 @@
     %Q{
       Ihre Geschäftspartner brauchen Zugang zu den zwielichtigen Dokumenten.
 
-      Änderen Sie die Zugriffsrechte des "nothing-to-see-here"-Ordners so um, dass jeder Benutzer darin Lesen, Schreiben und Ausführen kann.
+      Änderen Sie die Zugriffsrechte des `nothing-to-see-here`-Ordners so um, dass jeder Benutzer darin Lesen, Schreiben und Ausführen kann.
     },
     :enter,
     'sudo chmod og+rwx nothing-to-see-here',

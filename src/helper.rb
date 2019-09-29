@@ -127,3 +127,15 @@ def log_success(index, exercise)
     f.print("#{index}\t#{ENV['USER']}\t'#{exercise.title}'\t#{Time.new}\n")
   end
 end
+
+##
+# Highlight words in ` ` in the given string using ANSI escape sequences
+# @param input String the input
+# @return String the input with highlights
+def highlight(input)
+  result = input
+  while result =~ /(.*)`(.*?)`(.*)/m # multiline match (m)
+    result = "#{$1}#{bold($2)}#{$3}"
+  end
+  result
+end

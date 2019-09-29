@@ -5,9 +5,9 @@
     %Q{
       Sie haben sich auf eine karibische Insel abgesetzt und wollen dort mit einem Schnitzelrestaurant wieder neu anfangen, diesmal aber ohne zwielichtige Geschäftspraktiken. Noch in Deutschland haben Sie wichtige Dokumente archiviert und online gestellt.
 
-      Laden Sie die Ressource unter: #{CHAOS_URL}
+      Laden Sie die Datei unter: `#{CHAOS_URL}`
 
-      ...in das "#{PROJEKT_PATH}"-Verzeichnis herunter.
+      ...in das `#{PROJEKT_PATH}`-Verzeichnis herunter.
     },
     :enter,
     "wget #{CHAOS_URL}",

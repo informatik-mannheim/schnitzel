@@ -5,7 +5,7 @@
   %Q{
     Sie führen ein Schnitzelrestaurant und haben leider vergessen, was Sie für Ihre Gerichte verlangen.
 
-    Zum Glück haben Sie die Speisekarte in der Datei "speisekarte.txt" im "#{PROJEKT_PATH}"-Ordner gespeichert.
+    Zum Glück haben Sie die Speisekarte in der Datei `speisekarte.txt` im `#{PROJEKT_PATH}`-Ordner gespeichert.
 
     Schaue Sie in der Datei nach dem Preis für ein Wiener-Schnitzel.
   },

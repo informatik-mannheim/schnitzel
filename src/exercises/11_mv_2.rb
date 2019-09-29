@@ -5,7 +5,7 @@
     %Q{
       Das Finanzamt hat Unstimmigkeiten in Ihrer Steuererklärung festgestellt und Sie wollen Ihre Spuren zu den zwielichtigen Geschäften verwischen.
 
-      Änderen Sie den Namen des Ordners "shady-business" in "nothing-to-see-here" um.
+      Änderen Sie den Namen des Ordners `shady-business` in `nothing-to-see-here` um.
     },
     :enter,
     'sudo mv shady-business nothing-to-see-here',
