@@ -4,6 +4,8 @@
 # script `schnitzel`
 
 puts "Building `schnitzel`"
+
+# Join files together to the schnitzel script
 File.open('../schnitzel', 'w') do |out|
     File.open('../src/schnitzel.rb').each_line do |line|
     if line =~ /require_relative '(.*)'/
@@ -14,4 +16,7 @@ File.open('../schnitzel', 'w') do |out|
     end
   end
 end
+
+# Set the exectuable bit
+File.chmod(0755, '../schnitzel')
 
