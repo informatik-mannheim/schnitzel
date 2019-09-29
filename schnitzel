@@ -8,6 +8,9 @@
 # Constants
 # ------------
 
+# Width of the terminal
+LINE_WIDTH = 80
+
 # Base path to all our files
 BASE_PATH = "#{Dir.home}"
 
@@ -87,7 +90,20 @@ class Exercise
     @setup.call if @setup
     puts "#{red(@title)}\n\n"
     puts "#{yellow(@purpose)}\n\n"
-    puts %Q{#{@task.strip.split("\n").map(&:strip).join("\n")}\n\n}
+
+    # allow free formatting of the text in the input, Remove
+    # leading blanks
+    task_text = @task.strip.split("\n").map(&:strip)
+
+    # ensure that on the terminal no newline appears in the middle of
+    # a word
+    task_text.map! { |line| fit(line, LINE_WIDTH) }
+
+    # highlight keywords
+    task_text.map! { |line| highlight(line) }
+
+    # print the text
+    puts %Q{#{task_text.join("\n")}\n\n}
 
     begin
       if @input_message == :enter
@@ -147,7 +163,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def red(txt)
-  "\033[0;31m#{txt}\033[0m"
+  "\033[1;31m#{txt}\033[0m"
 end
 
 ##
@@ -155,7 +171,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def green(txt)
-  "\033[0;32m#{txt}\033[0m"
+  "\033[32m#{txt}\033[0m"
 end
 
 ##
@@ -163,7 +179,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def blue(txt)
-  "\033[0;34m#{txt}\033[0m"
+  "\033[34m#{txt}\033[0m"
 end
 
 ##
@@ -171,7 +187,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def yellow(txt)
-  "\033[1;33m#{txt}\033[0m"
+  "\033[33m#{txt}\033[0m"
 end
 
 ##
@@ -179,7 +195,7 @@ end
 # @param txt String the text to be formatted
 # @return String the formatted text
 def grey(txt)
-  "\033[1;30m#{txt}\033[0m"
+  "\033[30m#{txt}\033[0m"
 end
 
 ##
@@ -188,6 +204,14 @@ end
 # @return String the formatted text
 def bold(txt)
   "\033[1m#{txt}\033[0m"
+end
+
+##
+# Format the text for an ANSI terminal in underline
+# @param txt String the text to be formatted
+# @return String the formatted text
+def underline(txt)
+  "\033[4m#{txt}\033[0m"
 end
 
 ##
@@ -239,6 +263,49 @@ def log_success(index, exercise)
   end
 end
 
+##
+# Highlight words in ` ` and _ _ in the given string using ANSI escape sequences
+# @param input String the input
+# @return String the input with highlights
+def highlight(input)
+  result = input
+  while result =~ /(.*)`(.*?)`(.*)/m # multiline match (m)
+    result = "#{$1}#{bold($2)}#{$3}"
+  end
+
+  while result =~ /(.*)_(.*?)_(.*)/m # multiline match (m)
+    result = "#{$1}#{underline($2)}#{$3}"
+  end
+
+  result
+end
+
+##
+# Break the text in a way that it fits on the given witdh
+# without having a break in the middle of a word.
+# @param input String the text
+# @param width Integer the width
+# @return String the text with additional newlines
+def fit(input, width)
+  words = input.split(' ')
+  result = ''
+  line_length = 0
+  words.each_with_index do |w, i|
+    line_length += w.gsub(/`/, '').gsub(/_/, '').length # don't count ` and _
+    if line_length > width
+      # line full, start a new line
+      result << "\n"
+      line_length = w.length
+    elsif i > 0
+      # not the firs word, add a blank
+      result << ' '
+      line_length += 1
+    end
+    result << w
+  end
+  result
+end
+
 
 # ------------
 # The exercises
@@ -251,9 +318,9 @@ end
     'Hilfe',
     'Lernen Sie, sich die Hilfe von Programmen anzeigen zu lassen.',
     %Q{
-      Sie möchten mehr über ein Linux-Kommando erfahren. Dies erfolgt bei den meisten Kommandos über den Befehl "man". Bei manchen Kommandos kann man auch als Option "--help" angeben.
+      Sie möchten mehr über ein Linux-Kommando erfahren. Dies erfolgt bei den meisten Kommandos über den Befehl `man`. Bei manchen Kommandos kann man auch als Option `--help` angeben.
 
-      Geben Sie "man ls" ein und finden Sie heraus, mit welcher Option von ls man die Einträge nach dem Datum der letzen Veränderung sortieren kann.
+      Geben Sie `man ls` ein und finden Sie heraus, mit welcher Option von `ls` man die Einträge nach dem _Datum der letzen Veränderung_ sortieren kann. (Man kann die Anzeige von `man` mit `Q` verlassen und mit `/` darin suchen.)
     },
     'Wie lautet das gesuchte Kommando (inklusive ls)?',
     'ls -t',
@@ -265,9 +332,9 @@ end
   'Erstkontakt',
   'Lernen Sie in Verzeichnisse zu wechseln (cd) und Dateien zu editieren (vi / nano).',
   %Q{
-    Sie möchten eine Datei mit Ihre, Lieblingsfilm anlegen - der übrigens "Pulp Fiction" heißt.
+    Sie möchten eine Datei mit Ihrem Lieblingsfilm anlegen - der übrigens "_Pulp Fiction_" heißt.
 
-    Gehen Sie in das Verzeichnis "#{PROJEKT_PATH}" und legen Sie dort eine Datei mit dem Namen "film.txt" an, in die Sie "Pulp Fiction" schreiben. Verwenden Sie hierzu entweder den Editor vi oder nano.
+    Gehen Sie in das Verzeichnis `#{PROJEKT_PATH}` und legen Sie dort eine Datei mit dem Namen `film.txt` an, in die Sie "Pulp Fiction" schreiben. Verwenden Sie hierzu entweder den _Editor_ `vi` oder `nano`.
   },
   :enter,
   'cd ; cd linux-kurs ; echo "Pulp Fiction" > film.txt',
@@ -282,7 +349,7 @@ end
   %Q{
     Sie möchten eine Datei mit Lieblingsfilmen von jemand anderem editieren.
 
-    Gehen Sie in das Verzeichnis "#{PROJEKT_PATH}" und editieren Sie die Datei "prof-filme.txt", die dort liegt. Entfernen Sie den Film "Blade Runner", den Sie (unverständlicherweise) persönlich nicht mögen.
+    Gehen Sie in das Verzeichnis `#{PROJEKT_PATH}` und editieren Sie die Datei `prof-filme.txt`, die dort liegt. _Entfernen_ Sie den Film "_Blade Runner_", den Sie (unverständlicherweise) persönlich nicht mögen.
   },
   :enter,
   'vi prof-filme.txt; J DD :w :q',
@@ -297,9 +364,9 @@ end
   %Q{
     Sie führen ein Schnitzelrestaurant und haben leider vergessen, was Sie für Ihre Gerichte verlangen.
 
-    Zum Glück haben Sie die Speisekarte in der Datei "speisekarte.txt" im "#{PROJEKT_PATH}"-Ordner gespeichert.
+    Zum Glück haben Sie die Speisekarte in der Datei `speisekarte.txt` im `#{PROJEKT_PATH}`-Ordner gespeichert.
 
-    Schaue Sie in der Datei nach dem Preis für ein Wiener-Schnitzel.
+    Schaue Sie in der Datei nach dem _Preis für ein Wiener-Schnitzel_.
   },
   'Welchen Preis hat das Wiener Schnitzel?',
   'less speisekarte.txt',
@@ -314,9 +381,9 @@ end
   %Q{
     Der Steuerberater Ihres Restaurants braucht ein paar Unterlagen von Ihnen.
 
-    Erstelle für ihn einen Ordner "tax-man" im "#{PROJEKT_PATH}"-Verzeichnis.
+    _Erstelle_ für ihn einen _Ordner_ `tax-man` im `#{PROJEKT_PATH}`-Verzeichnis.
 
-    Kopieren Sie die Datei "speisekarte.txt" aus dem "#{PROJEKT_PATH}"-Verzeichnis in das "tax-man" Verzeichnis.
+    _Kopieren_ Sie die Datei `speisekarte.txt` aus dem `#{PROJEKT_PATH}`-Verzeichnis in das `tax-man` Verzeichnis.
    },
    :enter,
    'mkdir tax-man; cp speisekarte.txt tax-man/',
@@ -328,9 +395,9 @@ end
     'Geld stinkt nicht',
     'Machen Sie sich mit der Funktionsweise von mv vertraut.',
     %Q{
-      Ihr Steuerberater braucht noch weitere Unterlagen, die alle im Ordner "#{PROJEKT_PATH}/laundry" liegen.
+      Ihr Steuerberater braucht noch weitere Unterlagen, die alle im Ordner `#{PROJEKT_PATH}/laundry` liegen.
 
-      Bewegen Sie den Ordner "laundry", samt seines Inhaltes, in das "tax-man"-Verzeichnis in "#{PROJEKT_PATH}".
+      _Bewegen_ Sie den Ordner `laundry`, samt seines Inhaltes, in das `tax-man`-Verzeichnis in `#{PROJEKT_PATH}`.
     },
     :enter,
     'mv laundry tax-man',
@@ -351,9 +418,9 @@ end
     'Unter den Teppich kehren',
     'Machen Sie sich mit der Funktionsweise von rm vertraut.',
     %Q{
-      Sie sind sich klar geworden, dass man eine Speisekarte vielleicht doch nicht als .txt-Datei verwaltet und haben Sie bereits in ein passendes Format übertragen.
+      Sie sind sich klar geworden, dass man eine Speisekarte vielleicht doch nicht als .txt-Datei verwaltet und haben die Daten bereits in einer Datenbank gespeichert.
 
-      Lösche Sie die Datei "speisekarte.txt" aus dem #{PROJEKT_PATH}-Verzeichnis.
+      _Löschen_ Sie die Datei `speisekarte.txt` aus dem `#{PROJEKT_PATH}`-Verzeichnis.
     },
     :enter,
     'rm speisekarte.txt',
@@ -365,7 +432,7 @@ end
     'Wer bin ich?',
     'Mache Sie sich mit der Funktionsweise von whoami vertraut.',
     %Q{
-      Finde Sie heraus, als welcher Benutzer Sie im System angemeldet sind.
+      Finde Sie heraus, als _welcher Benutzer_ Sie im System angemeldet sind.
     },
     'Tragen Sie hier ein, wie Ihr Benutzer heißt:',
     'whoami',
@@ -377,9 +444,9 @@ end
     'Wem gehört denn das?',
     'Vertiefen Sie Ihr Wissen zu ls.',
     %Q{
-      Sie verwalten Dateien zu zwielichtigen Geschäften im Ordner "shady-business" im "#{PROJEKT_PATH}"-Verzeichnis.
+      Sie verwalten Dateien zu zwielichtigen Geschäften im Ordner `shady-business` im `#{PROJEKT_PATH}`-Verzeichnis.
 
-      Finden Sie heraus, welcher Benutzer der Besitzer des Ordners "shady-business" ist.
+      Finden Sie heraus, welcher Benutzer der _Besitzer des Ordners_ `shady-business` ist.
     },
     'Trage Sie hier den Namen des Besitzers ein:',
     'ls -axl',
@@ -392,7 +459,7 @@ end
     'What a Superuser can do',
     'Machen Sie sich mit der Funktionsweise von sudo und chown vertraut.',
     %Q{
-      Nutzen Sie die Macht eines Superusers und setzen den Besitzer des Ordners "shady-business" auf "nobody", damit man Ihnen später nichts nachsagen kann.
+      Nutzen Sie die Macht eines Superusers und _ändern_ Sie den _Besitzer_ des Ordners `shady-business` auf `nobody`, damit man Ihnen später nichts nachsagen kann.
     },
     :enter,
     'sudo chown nobody shady-business',
@@ -407,7 +474,7 @@ end
     %Q{
       Das Finanzamt hat Unstimmigkeiten in Ihrer Steuererklärung festgestellt und Sie wollen Ihre Spuren zu den zwielichtigen Geschäften verwischen.
 
-      Änderen Sie den Namen des Ordners "shady-business" in "nothing-to-see-here" um.
+      _Änderen_ Sie den _Namen des Ordners_ `shady-business` in `nothing-to-see-here` um.
     },
     :enter,
     'sudo mv shady-business nothing-to-see-here',
@@ -421,7 +488,7 @@ end
     %Q{
       Ihre Geschäftspartner brauchen Zugang zu den zwielichtigen Dokumenten.
 
-      Änderen Sie die Zugriffsrechte des "nothing-to-see-here"-Ordners so um, dass jeder Benutzer darin Lesen, Schreiben und Ausführen kann.
+      _Änderen_ Sie die _Zugriffsrechte_ des `nothing-to-see-here`-Ordners so um, dass jeder Benutzer darin lesen, schreiben und ausführen kann.
     },
     :enter,
     'sudo chmod og+rwx nothing-to-see-here',
@@ -435,7 +502,7 @@ end
     %Q{
       Die Steuerfahndung ist Ihnen auf der Spur und Ihnen wird die Sache zu heiß. Sie entscheiden sich, alle Dokumente, die Sie mit zwielichtigen Geschäften in Verbindung bringen könnten zu löschen.
 
-      Löschen Sie den Ordner "nothing-to-see-here", zusammen mit seinem Inhalt.
+      _Löschen Sie den Ordner_ `nothing-to-see-here`, zusammen mit seinem Inhalt.
     },
     :enter,
     'rm -rf nothing-to-see-here',
@@ -449,9 +516,9 @@ end
     %Q{
       Sie haben sich auf eine karibische Insel abgesetzt und wollen dort mit einem Schnitzelrestaurant wieder neu anfangen, diesmal aber ohne zwielichtige Geschäftspraktiken. Noch in Deutschland haben Sie wichtige Dokumente archiviert und online gestellt.
 
-      Laden Sie die Ressource unter: #{CHAOS_URL}
+      Laden Sie die Datei unter: `#{CHAOS_URL}`
 
-      ...in das "#{PROJEKT_PATH}"-Verzeichnis herunter.
+      ...in das `#{PROJEKT_PATH}`-Verzeichnis herunter.
     },
     :enter,
     "wget #{CHAOS_URL}",
@@ -465,7 +532,7 @@ end
     %Q{
       Die Dokumente wurden in einem Archiv gespeichert, um sie kompakt und gebündelt zu verwalten.
 
-      Entpacken Sie das heruntergeladene Archiv in den Ordner "#{PROJEKT_PATH}".
+      _Entpacken_ Sie das heruntergeladene Archiv in den Ordner `#{PROJEKT_PATH}`.
     },
     :enter,
     'tar -xJf chaos.tar.xz',
@@ -477,9 +544,9 @@ end
     'Find what you search for',
     'Mache Sie sich mit der Funktionsweise von find vertraut.',
     %Q{
-      Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in "#{PROJEKT_PATH}/chaos" gespeichert sind.
+      Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in `#{PROJEKT_PATH}/chaos` gespeichert sind.
 
-      Finden Sie alle .txt-Dateien im "chaos"-Ordner (und den Unterordnern).
+      Finden Sie _alle_ .txt-Dateien im `chaos`-Ordner (und den Unterordnern).
     },
     'Trage hier ein, wieviele .txt-Dateien im Ordner vorhanden sind:',
     'find chaos/ -name "*.txt" | wc',
@@ -494,11 +561,11 @@ end
     %Q{
       Sie suchen nach einem wichtigen Passwort, wissen aber nicht mehr wo es steht.
 
-      Sie wissen nur, dass es irgendwo in einer Datei im "chaos"-Ordner gespeichert ist und sowohl mit einem "#" anfängt, als auch aufhört.
+      Sie wissen nur, dass es irgendwo in einer Datei im `chaos`-Ordner gespeichert ist und sowohl mit einem `"#"` anfängt, als auch aufhört.
 
-      Navigieren Sie in den Ordner "#{PROJEKT_PATH}/chaos".
+      Navigieren Sie in den Ordner `#{PROJEKT_PATH}/chaos`.
 
-      Nutzen Sie grep, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist "#.*#").
+      Nutzen Sie `grep`, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist `#.*#`).
     },
     'Wie lautet das magische Passwort (ohne die #)?',
     'grep -roh "#.*#"',
@@ -512,7 +579,7 @@ end
     %Q{
       Sie suchen nach einem kleinen Unterschied zwischen zwei Dateien.
 
-      Verwenden Sie diff, um den Unterschied zwischen den beiden Dateien "kafka1.txt" und "kafka2.txt" im "chaos"-Ordner zu finden.
+      Verwenden Sie `diff`, um den _Unterschied_ zwischen den beiden Dateien `kafka1.txt` und `kafka2.txt` im `chaos`-Ordner zu finden.
     },
     'Wie lautet der Unterschied?',
     'diff kafka1.txt kafka2.txt',
@@ -524,9 +591,9 @@ end
     'Sortieren und ordnen',
     'Machen Sie sich mit der Funktionsweise von sort, uniq und der Ausgabeumleitung (<,>,|) vertraut.',
     %Q{
-      Im Ordner "chaos" befindet sich eine Wortliste in der Datei "wortliste.txt", die jedoch beim Transport heftig durcheinander geraten ist. Außerdem sind noch einige Worte mehrfach vorhanden.
+      Im Ordner `chaos` befindet sich eine Wortliste in der Datei `wortliste.txt`, die jedoch beim Transport heftig durcheinander geraten ist. Außerdem sind noch einige Worte mehrfach vorhanden.
 
-      Verwenden Sie sort und uniq, um die Liste zu sortieren und Doubletten zu entfernen. Speichern Sie das Ergebnis in der Datei "wortliste_sortiert.txt" im Ordner "#{PROJEKT_PATH}".
+      Verwenden Sie `sort` und `uniq`, um die Liste zu sortieren und Doubletten zu entfernen. Speichern Sie das Ergebnis in der Datei `wortliste_sortiert.txt` direkt im Ordner `#{PROJEKT_PATH}`.
     },
     :enter,
     'cd chaos; sort wortliste.txt | uniq > ../wortliste_sortiert.txt',
@@ -538,9 +605,9 @@ end
     'Monnheim',
     'Machen Sie sich mit der Funktionsweise von grep, sed und der Ausgabeumleitung (<,>,|) vertraut.',
     %Q{
-      Sie wollen aus der sortierten Wortliste einige Wörter mit "grep" heraussuchen und diese dann mit "sed" verändern.
+      Sie wollen aus der sortierten Wortliste einige Wörter mit `grep` heraussuchen und diese dann mit `sed` verändern.
 
-      Finden Sie alle Wörter in der Liste "wortliste_sortiert.txt", in denen die Buchstabenfolge "heim" vorkommt. Ersetzen Sie diese Buchstaben durch "mannheim" und schreiben Sie das Ergebnis in eine neue Datei "monnheim.txt" im Ordner "#{PROJEKT_PATH}".
+      Finden Sie alle Wörter in der Liste `wortliste_sortiert.txt`, in denen die Buchstabenfolge `"heim"` vorkommt. Ersetzen Sie diese Buchstaben durch `"mannheim"` und schreiben Sie das Ergebnis in eine neue Datei `"monnheim.txt"` im Ordner `#{PROJEKT_PATH}`.
     },
     :enter,
     'grep heim wortliste_sortiert.txt | sed -e "s/heim/mannheim/g" > monnheim.txt',
@@ -552,7 +619,7 @@ end
     'Was heißt hier Softie?',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
-      Im Ordner "#{PROJEKT_PATH}" finden Sie eine Datei namens "highlander.txt". Erstellen Sie einen Softlink (symbolischer Link) namens "macleod.txt" auf diese Datei.
+      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen _Softlink_ (symbolischer Link) namens `macleod.txt` auf diese Datei.
     },
     :enter,
     'ln -s highlander.txt macleod.txt',
@@ -565,7 +632,9 @@ end
     'Nur die Harten kommen in den Garten',
     'Machen Sie sich mit der Funktionsweise von Hard- und Softlinks und dem Kommando "ln" vertraut.',
     %Q{
-      Im Ordner "#{PROJEKT_PATH}" finden Sie eine Datei namens "highlander.txt". Erstellen Sie einen Hardlink namens "fasil.txt" auf diese Datei. Öffnen Sie nun "fasil.txt" in einem Texteditor und ändern Sie den Inhalt zu "Es kann nur zwei geben!" und speichern Sie den Inhalt. Sehen Sie sich danach die Datei "highlander.txt" an.
+      Im Ordner `#{PROJEKT_PATH}` finden Sie eine Datei namens `highlander.txt`. Erstellen Sie einen _Hardlink_ namens `fasil.txt` auf diese Datei.
+
+      Öffnen Sie nun `fasil.txt` in einem Texteditor und ändern Sie den Inhalt zu `"Es kann nur zwei geben!"` und speichern Sie den Inhalt. Sehen Sie sich danach die Datei `highlander.txt` an.
     },
     :enter,
     'ln highlander.txt fasil.txt',
@@ -578,7 +647,7 @@ end
     'Vertrauen ist nichts, Kontrolle ist alles',
     'Machen Sie sich mit der Funktionsweise "ps" und "kill" vertraut.',
     %Q{
-      Auf Ihrem System läut ein Prozess mit dem Namen "sleep". Finden Sie ihn und beenden Sie den Prozess. Möglicherweise laufen auch mehrere Prozesse, dann beenden Sie alle mit dem Namen "sleep".
+      Auf Ihrem System läut ein Prozess mit dem Namen `"sleep"`. Finden Sie ihn und _beenden Sie den Prozess_. Möglicherweise laufen auch mehrere Prozesse, dann beenden Sie alle mit dem Namen `"sleep"`.
     },
     :enter,
     'ps aux | grep sleep ; kill ...',
@@ -603,7 +672,7 @@ end
 
   # Execute the exercise and log success
   puts "#{cls}"
-  print progress_bar(@exercises.length, index, 70)
+  print progress_bar(@exercises.length, index, LINE_WIDTH - 8)
   print "\n\n"
   exercise.execute
   log_success(index, exercise)
@@ -612,7 +681,7 @@ end
 end
 
 puts "#{cls}"
-print progress_bar(@exercises.length, @exercises.length, 70)
+print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
 puts green(%q{
  _    _  _                             _    _  _
 | |  | |(_)                           | |  | |(_)
