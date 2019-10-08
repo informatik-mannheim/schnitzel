@@ -11,7 +11,7 @@
 # Width of the terminal
 LINE_WIDTH = 80
 
-# Base path to all our files
+# Base path to all our files (User's home)
 BASE_PATH = "#{Dir.home}"
 
 # Our directory (without base path)
@@ -59,27 +59,6 @@ Alle Aufgaben gelöst. Herzlichen Glückwunsch!
 FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
                 Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
                 Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
-
-
-# ------------
-# OS dependencies
-# ------------
-
-if RUBY_PLATFORM =~ /linux/
-  # Linux
-  STAT_USER = 'stat -c %U'
-  STAT_PERMISSIONS = 'stat -c %a'
-  STAT_LINK_COUNT = 'stat -c %h'
-elsif RUBY_PLATFORM =~ /darwin/
-  # MacOS
-  STAT_USER = 'stat -f %Su'
-  STAT_PERMISSIONS = 'stat -f %Lp'
-  STAT_LINK_COUNT = 'stat -f %l'
-else
-  # Unknown OS
-  puts "Unknown operating system. Exiting..."
-  exit 1
-end
 
 # Class for the definition of exercises
 ##
@@ -143,11 +122,28 @@ class Exercise
         print "#{bold(@input_message)} "
       end
 
-      passed = @check.call
+      # determine OS. Currently supported :linux and :macos
+      os = if RUBY_PLATFORM =~ /linux/
+             :linux
+          elsif RUBY_PLATFORM =~ /darwin/
+             :macos
+          else
+             nil
+          end
+
+      # Call the check. Lambdas enforce arity, therefore
+      # we check it before calling the Proc/Lambda to avoid
+      # crashes
+      passed = if @check.arity == 1
+                 @check.call(os)
+               else
+                 @check.call
+               end
 
       if (!passed)
         puts red("\n#{WRONG_SOLUTION}\n")
       end
+
     end while !passed
 
     puts green("\n#{CORRECT_SOLUTION}\n")
@@ -497,7 +493,13 @@ end
     },
     :enter,
     'sudo chown nobody shady-business',
-    -> () { `#{STAT_USER} #{PATH}/shady-business`.strip == 'nobody' },
+    -> (os) do
+      if os == :linux
+        `stat -c %U #{PATH}/shady-business`.strip == 'nobody'
+      elsif os == :macos
+        `stat -f %Su #{PATH}/shady-business`.strip == 'nobody'
+      end
+    end,
     -> () { mkdir("#{PATH}/shady-business"); fill_dir("#{PATH}/shady-business") }
 )
 
@@ -526,7 +528,15 @@ end
     },
     :enter,
     'sudo chmod og+rwx nothing-to-see-here',
-    -> () { p = `#{STAT_PERMISSIONS} #{PATH}/nothing-to-see-here`.strip; p == '777' || p == '707' }
+    -> (os) do
+      if os == :linux
+        p = `stat -c %a #{PATH}/nothing-to-see-here`.strip
+      elsif os == :macos
+        p = `stat -f %Lp #{PATH}/nothing-to-see-here`.strip
+      end
+
+      p == '777' || p == '707'
+    end
 )
 
 # rm -rf
@@ -672,7 +682,15 @@ end
     },
     :enter,
     'ln highlander.txt fasil.txt',
-    -> () { f = "#{PATH}/fasil.txt"; File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && `#{STAT_LINK_COUNT} #{f}`.strip == "2" },
+    -> (os) do
+      f = "#{PATH}/fasil.txt"
+      File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
+      if os == :linux
+        `stat -c %h #{f}`.strip == "2"
+      elsif os == :macos
+        `stat -f %l #{f}`.strip == "2"
+      end
+    end,
     -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
 )
 
