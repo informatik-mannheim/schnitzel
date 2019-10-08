@@ -35,11 +35,6 @@ CORRECT_SOLUTION = "Korrekt. Gut gemacht!"
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
 
-# Some "arbitrary" file names
-FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
-                Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
-                Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
-
 # Message shown if all exercises were done
 WINNER_MESSAGE = %q{
  _    _  _                             _    _  _
@@ -59,6 +54,12 @@ WINNER_MESSAGE = %q{
 Alle Aufgaben gelöst. Herzlichen Glückwunsch!
 
 }
+
+# Some "arbitrary" file names
+FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
+                Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
+                Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
+
 
 # ------------
 # OS dependencies
@@ -255,11 +256,14 @@ end
 # Create a progress bar string
 # @param max Integer maximum value
 # @param actual Integer actual value
-# @param width Integer width of the bar (without the a/m display)
+# @param width Integer width of the bar (including the a/m display)
 def progress_bar(max, actual, width)
+
+  corrected_width = width - max.to_s.length*2 - 2
+
   progress = actual.to_f / max.to_f
-  filled = (width * progress).to_i
-  empty = (width - filled).to_i
+  filled = (corrected_width * progress).to_i
+  empty = (corrected_width - filled).to_i
 
   output = ''
   filled.times { output << "\u2588" }
@@ -702,7 +706,7 @@ end
 
   # Execute the exercise and log success
   puts "#{cls}"
-  print progress_bar(@exercises.length, index, LINE_WIDTH - 8)
+  print progress_bar(@exercises.length, index, LINE_WIDTH)
   print "\n\n"
   exercise.execute
   log_success(index, exercise)
@@ -711,5 +715,5 @@ end
 end
 
 puts "#{cls}"
-print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
+print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH)
 puts green(WINNER_MESSAGE)

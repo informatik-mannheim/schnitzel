@@ -133,7 +133,7 @@ end
 
   # Execute the exercise and log success
   puts "#{cls}"
-  print progress_bar(@exercises.length, index, LINE_WIDTH - 8)
+  print progress_bar(@exercises.length, index, LINE_WIDTH)
   print "\n\n"
   exercise.execute
   log_success(index, exercise)
@@ -142,5 +142,5 @@ end
 end
 
 puts "#{cls}"
-print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
+print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH)
 puts green(WINNER_MESSAGE)

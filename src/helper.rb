@@ -98,11 +98,14 @@ end
 # Create a progress bar string
 # @param max Integer maximum value
 # @param actual Integer actual value
-# @param width Integer width of the bar (without the a/m display)
+# @param width Integer width of the bar (including the a/m display)
 def progress_bar(max, actual, width)
+
+  corrected_width = width - max.to_s.length*2 - 2
+
   progress = actual.to_f / max.to_f
-  filled = (width * progress).to_i
-  empty = (width - filled).to_i
+  filled = (corrected_width * progress).to_i
+  empty = (corrected_width - filled).to_i
 
   output = ''
   filled.times { output << "\u2588" }
