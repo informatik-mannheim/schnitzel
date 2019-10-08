@@ -9,5 +9,13 @@
     },
     :enter,
     'sudo chmod og+rwx nothing-to-see-here',
-    -> () { p = `#{STAT_PERMISSIONS} #{PATH}/nothing-to-see-here`.strip; p == '777' || p == '707' }
+    -> (os) do
+      if os == :linux
+        p = `stat -c %a #{PATH}/nothing-to-see-here`.strip
+      elsif os == :macos
+        p = `stat -f %Lp #{PATH}/nothing-to-see-here`.strip
+      end
+
+      p == '777' || p == '707'
+    end
 )

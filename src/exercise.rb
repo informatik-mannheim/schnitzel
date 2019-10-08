@@ -59,11 +59,28 @@ class Exercise
         print "#{bold(@input_message)} "
       end
 
-      passed = @check.call
+      # determine OS. Currently supported :linux and :macos
+      os = if RUBY_PLATFORM =~ /linux/
+             :linux
+          elsif RUBY_PLATFORM =~ /darwin/
+             :macos
+          else
+             nil
+          end
+
+      # Call the check. Lambdas enforce arity, therefore
+      # we check it before calling the Proc/Lambda to avoid
+      # crashes
+      passed = if @check.arity == 1
+                 @check.call(os)
+               else
+                 @check.call
+               end
 
       if (!passed)
         puts red("\n#{WRONG_SOLUTION}\n")
       end
+
     end while !passed
 
     puts green("\n#{CORRECT_SOLUTION}\n")

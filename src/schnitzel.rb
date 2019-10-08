@@ -11,7 +11,7 @@
 # Width of the terminal
 LINE_WIDTH = 80
 
-# Base path to all our files
+# Base path to all our files (User's home)
 BASE_PATH = "#{Dir.home}"
 
 # Our directory (without base path)
@@ -59,27 +59,6 @@ Alle Aufgaben gelöst. Herzlichen Glückwunsch!
 FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
                 Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
                 Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
-
-
-# ------------
-# OS dependencies
-# ------------
-
-if RUBY_PLATFORM =~ /linux/
-  # Linux
-  STAT_USER = 'stat -c %U'
-  STAT_PERMISSIONS = 'stat -c %a'
-  STAT_LINK_COUNT = 'stat -c %h'
-elsif RUBY_PLATFORM =~ /darwin/
-  # MacOS
-  STAT_USER = 'stat -f %Su'
-  STAT_PERMISSIONS = 'stat -f %Lp'
-  STAT_LINK_COUNT = 'stat -f %l'
-else
-  # Unknown OS
-  puts "Unknown operating system. Exiting..."
-  exit 1
-end
 
 # Class for the definition of exercises
 require_relative 'exercise.rb'

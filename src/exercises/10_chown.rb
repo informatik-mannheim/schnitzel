@@ -7,6 +7,12 @@
     },
     :enter,
     'sudo chown nobody shady-business',
-    -> () { `#{STAT_USER} #{PATH}/shady-business`.strip == 'nobody' },
+    -> (os) do
+      if os == :linux
+        `stat -c %U #{PATH}/shady-business`.strip == 'nobody'
+      elsif os == :macos
+        `stat -f %Su #{PATH}/shady-business`.strip == 'nobody'
+      end
+    end,
     -> () { mkdir("#{PATH}/shady-business"); fill_dir("#{PATH}/shady-business") }
 )

@@ -9,6 +9,14 @@
     },
     :enter,
     'ln highlander.txt fasil.txt',
-    -> () { f = "#{PATH}/fasil.txt"; File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && `#{STAT_LINK_COUNT} #{f}`.strip == "2" },
+    -> (os) do
+      f = "#{PATH}/fasil.txt"
+      File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
+      if os == :linux
+        `stat -c %h #{f}`.strip == "2"
+      elsif os == :macos
+        `stat -f %l #{f}`.strip == "2"
+      end
+    end,
     -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
 )
