@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 # Interaktive Schnitzeljagd, um die Linux-Konsole kennen zu lernen.
-# Basierend auf einer Idee von Eugen Krizki and Richard Vladimirskij.
+# Basierend auf einer Idee von Eugen Krizki and Richard Vladimirskij,
+# siehe https://github.com/limecakeio/pepio
 # (c) 2019 Thomas Smits
 
 # ------------
@@ -72,6 +73,7 @@ require_relative 'helper.rb'
 
 @exercises = []
 
+# Include the different exercises here
 require_relative 'exercises/01_man.rb'
 require_relative 'exercises/02_editor.rb'
 require_relative 'exercises/03_editor_2.rb'
@@ -126,9 +128,11 @@ os = if RUBY_PLATFORM =~ /linux/
   exercise.execute(os)
   log_success(index, exercise)
 
+  # Give user time to read the message before moving to the next screen
   Kernel.sleep(2)
 end
 
+# Final message - won the game
 puts "#{cls}"
 print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH)
 puts green(WINNER_MESSAGE)
