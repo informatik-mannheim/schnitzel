@@ -117,7 +117,7 @@ end
 # Get the last exercise from the log file, if present. Otherwise
 # return 0
 # @return the last exercise sucessfully performed
-def next_exercise
+def next_exercise_from_log
   start = 0
   if File.exists?(LOG_FILE)
     contents = File.readlines(LOG_FILE)

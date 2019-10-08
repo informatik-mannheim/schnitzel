@@ -40,6 +40,26 @@ FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Depo
                 Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
                 Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
 
+# Message shown if all exercises were done
+WINNER_MESSAGE = %q{
+ _    _  _                             _    _  _
+| |  | |(_)                           | |  | |(_)
+| |  | | _  _ __   _ __    ___  _ __  | |  | | _  _ __   _ __    ___  _ __
+| |/\| || || '_ \ | '_ \  / _ \| '__| | |/\| || || '_ \ | '_ \  / _ \| '__|
+\  /\  /| || | | || | | ||  __/| |    \  /\  /| || | | || | | ||  __/| |
+ \/  \/ |_||_| |_||_| |_| \___||_|     \/  \/ |_||_| |_||_| |_| \___||_|
+
+ _____  _      _        _                 ______  _
+/  __ \| |    (_)      | |                |  _  \(_)
+| /  \/| |__   _   ___ | | __ ___  _ __   | | | | _  _ __   _ __    ___  _ __
+| |    | '_ \ | | / __|| |/ // _ \| '_ \  | | | || || '_ \ | '_ \  / _ \| '__|
+| \__/\| | | || || (__ |   <|  __/| | | | | |/ / | || | | || | | ||  __/| |
+ \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
+
+Alle Aufgaben gelöst. Herzlichen Glückwunsch!
+
+}
+
 # ------------
 # OS dependencies
 # ------------
@@ -254,7 +274,7 @@ end
 # Get the last exercise from the log file, if present. Otherwise
 # return 0
 # @return the last exercise sucessfully performed
-def next_exercise
+def next_exercise_from_log
   start = 0
   if File.exists?(LOG_FILE)
     contents = File.readlines(LOG_FILE)
@@ -291,7 +311,7 @@ def highlight(input)
 end
 
 ##
-# Break the text in a way that it fits on the given witdh
+# Break the text in a way that it fits on the given width
 # without having a break in the middle of a word.
 # @param input String the text
 # @param width Integer the width
@@ -307,7 +327,7 @@ def fit(input, width)
       result << "\n"
       line_length = w.length
     elsif i > 0
-      # not the firs word, add a blank
+      # not the first word, add a blank
       result << ' '
       line_length += 1
     end
@@ -666,7 +686,7 @@ end
 )
 
 
-start = next_exercise
+start = next_exercise_from_log
 
 # Override current progress from
 # the command line
@@ -692,20 +712,4 @@ end
 
 puts "#{cls}"
 print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
-puts green(%q{
- _    _  _                             _    _  _
-| |  | |(_)                           | |  | |(_)
-| |  | | _  _ __   _ __    ___  _ __  | |  | | _  _ __   _ __    ___  _ __
-| |/\| || || '_ \ | '_ \  / _ \| '__| | |/\| || || '_ \ | '_ \  / _ \| '__|
-\  /\  /| || | | || | | ||  __/| |    \  /\  /| || | | || | | ||  __/| |
- \/  \/ |_||_| |_||_| |_| \___||_|     \/  \/ |_||_| |_||_| |_| \___||_|
-
- _____  _      _        _                 ______  _
-/  __ \| |    (_)      | |                |  _  \(_)
-| /  \/| |__   _   ___ | | __ ___  _ __   | | | | _  _ __   _ __    ___  _ __
-| |    | '_ \ | | / __|| |/ // _ \| '_ \  | | | || || '_ \ | '_ \  / _ \| '__|
-| \__/\| | | || || (__ |   <|  __/| | | | | |/ / | || | | || | | ||  __/| |
- \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
-})
-
-puts green("Alle Aufgaben gelöst. Herzlichen Glückwunsch!\n")
+puts green(WINNER_MESSAGE)

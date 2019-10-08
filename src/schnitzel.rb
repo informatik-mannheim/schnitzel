@@ -35,10 +35,31 @@ CORRECT_SOLUTION = "Korrekt. Gut gemacht!"
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
 
+# Message shown if all exercises were done
+WINNER_MESSAGE = %q{
+ _    _  _                             _    _  _
+| |  | |(_)                           | |  | |(_)
+| |  | | _  _ __   _ __    ___  _ __  | |  | | _  _ __   _ __    ___  _ __
+| |/\| || || '_ \ | '_ \  / _ \| '__| | |/\| || || '_ \ | '_ \  / _ \| '__|
+\  /\  /| || | | || | | ||  __/| |    \  /\  /| || | | || | | ||  __/| |
+ \/  \/ |_||_| |_||_| |_| \___||_|     \/  \/ |_||_| |_||_| |_| \___||_|
+
+ _____  _      _        _                 ______  _
+/  __ \| |    (_)      | |                |  _  \(_)
+| /  \/| |__   _   ___ | | __ ___  _ __   | | | | _  _ __   _ __    ___  _ __
+| |    | '_ \ | | / __|| |/ // _ \| '_ \  | | | || || '_ \ | '_ \  / _ \| '__|
+| \__/\| | | || || (__ |   <|  __/| | | | | |/ / | || | | || | | ||  __/| |
+ \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
+
+Alle Aufgaben gelöst. Herzlichen Glückwunsch!
+
+}
+
 # Some "arbitrary" file names
 FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
                 Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
                 Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
+
 
 # ------------
 # OS dependencies
@@ -96,7 +117,7 @@ require_relative 'exercises/21_ls_s.rb'
 require_relative 'exercises/22_ln.rb'
 require_relative 'exercises/23_ps_kill.rb'
 
-start = next_exercise
+start = next_exercise_from_log
 
 # Override current progress from
 # the command line
@@ -122,20 +143,4 @@ end
 
 puts "#{cls}"
 print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH - 8)
-puts green(%q{
- _    _  _                             _    _  _
-| |  | |(_)                           | |  | |(_)
-| |  | | _  _ __   _ __    ___  _ __  | |  | | _  _ __   _ __    ___  _ __
-| |/\| || || '_ \ | '_ \  / _ \| '__| | |/\| || || '_ \ | '_ \  / _ \| '__|
-\  /\  /| || | | || | | ||  __/| |    \  /\  /| || | | || | | ||  __/| |
- \/  \/ |_||_| |_||_| |_| \___||_|     \/  \/ |_||_| |_||_| |_| \___||_|
-
- _____  _      _        _                 ______  _
-/  __ \| |    (_)      | |                |  _  \(_)
-| /  \/| |__   _   ___ | | __ ___  _ __   | | | | _  _ __   _ __    ___  _ __
-| |    | '_ \ | | / __|| |/ // _ \| '_ \  | | | || || '_ \ | '_ \  / _ \| '__|
-| \__/\| | | || || (__ |   <|  __/| | | | | |/ / | || | | || | | ||  __/| |
- \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
-})
-
-puts green("Alle Aufgaben gelöst. Herzlichen Glückwunsch!\n")
+puts green(WINNER_MESSAGE)
