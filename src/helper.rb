@@ -154,7 +154,7 @@ def highlight(input)
 end
 
 ##
-# Break the text in a way that it fits on the given witdh
+# Break the text in a way that it fits on the given width
 # without having a break in the middle of a word.
 # @param input String the text
 # @param width Integer the width
@@ -170,7 +170,7 @@ def fit(input, width)
       result << "\n"
       line_length = w.length
     elsif i > 0
-      # not the firs word, add a blank
+      # not the first word, add a blank
       result << ' '
       line_length += 1
     end
