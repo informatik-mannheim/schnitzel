@@ -104,6 +104,15 @@ if ARGV[0]
   start = ARGV[0].to_i
 end
 
+# determine OS. Currently supported :linux and :macos
+os = if RUBY_PLATFORM =~ /linux/
+        :linux
+    elsif RUBY_PLATFORM =~ /darwin/
+        :macos
+    else
+        nil
+    end
+
 # Execute the exercises
 @exercises.each_with_index do |exercise, index|
 
@@ -114,7 +123,7 @@ end
   puts "#{cls}"
   print progress_bar(@exercises.length, index, LINE_WIDTH)
   print "\n\n"
-  exercise.execute
+  exercise.execute(os)
   log_success(index, exercise)
 
   Kernel.sleep(2)

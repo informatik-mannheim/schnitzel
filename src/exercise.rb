@@ -29,7 +29,9 @@ class Exercise
 
   ##
   # Execute this exercise
-  def execute
+  # @param os Symbol the operating system. Passed thru to the
+  #                  check lambda
+  def execute(os)
 
     @setup.call if @setup
     puts "#{red(@title)}\n\n"
@@ -58,15 +60,6 @@ class Exercise
         # user defined message
         print "#{bold(@input_message)} "
       end
-
-      # determine OS. Currently supported :linux and :macos
-      os = if RUBY_PLATFORM =~ /linux/
-             :linux
-          elsif RUBY_PLATFORM =~ /darwin/
-             :macos
-          else
-             nil
-          end
 
       # Call the check. Lambdas enforce arity, therefore
       # we check it before calling the Proc/Lambda to avoid
