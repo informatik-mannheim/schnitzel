@@ -26,6 +26,12 @@ LOG_FILE = "#{PATH}/.schnitzel.log"
 # Text ot ask for <ENTER>
 ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 
+# Wrong solution
+WRONG_SOLUTION = "Leider falsch. Probieren Sie es noch einmal."
+
+# Correct solution
+CORRECT_SOLUTION = "Korrekt. Gut gemacht!"
+
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
 
@@ -54,8 +60,10 @@ else
   exit 1
 end
 
+# Class for the definition of exercises
 require_relative 'exercise.rb'
 
+# Helper functions
 require_relative 'helper.rb'
 
 # ------------

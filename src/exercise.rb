@@ -51,19 +51,21 @@ class Exercise
 
     begin
       if @input_message == :enter
+        # standard text asking for <ENTER>
         print "#{bold(ENTER_TEXT)} "
         $stdin.gets
       else
+        # user defined message
         print "#{bold(@input_message)} "
       end
 
       passed = @check.call
 
       if (!passed)
-        puts red("\nLeider falsch. Probieren Sie es noch einmal.\n")
+        puts red("\n#{WRONG_SOLUTION}\n")
       end
     end while !passed
 
-    puts green("\nKorrekt. Gut gemacht!\n")
+    puts green("\n#{CORRECT_SOLUTION}\n")
   end
 end
