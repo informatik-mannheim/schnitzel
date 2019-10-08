@@ -106,12 +106,12 @@ end
 
 # determine OS. Currently supported :linux and :macos
 os = if RUBY_PLATFORM =~ /linux/
-        :linux
-    elsif RUBY_PLATFORM =~ /darwin/
-        :macos
-    else
-        nil
-    end
+       :linux
+     elsif RUBY_PLATFORM =~ /darwin/
+       :macos
+     else
+       nil
+     end
 
 # Execute the exercises
 @exercises.each_with_index do |exercise, index|
