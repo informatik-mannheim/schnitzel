@@ -94,7 +94,7 @@ require_relative 'exercises/17_grep.rb'
 require_relative 'exercises/18_diff.rb'
 require_relative 'exercises/19_sort.rb'
 require_relative 'exercises/20_grep_sed.rb'
-require_relative 'exercises/21_ls_s.rb'
+require_relative 'exercises/21_ln_s.rb'
 require_relative 'exercises/22_ln.rb'
 require_relative 'exercises/23_ps_kill.rb'
 
