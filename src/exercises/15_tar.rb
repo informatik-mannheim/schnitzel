@@ -9,5 +9,5 @@
     },
     :enter,
     'tar -xJf chaos.tar.xz',
-    -> () { Dir.exists?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == 66898 }
+    -> () { Dir.exists?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == 66899 }
 )
