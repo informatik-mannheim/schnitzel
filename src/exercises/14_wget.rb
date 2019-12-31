@@ -11,5 +11,5 @@
     },
     :enter,
     "wget #{CHAOS_URL}",
-    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == 2352592 }
+    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == 5454500 }
 )
