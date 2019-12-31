@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # Generator für das chaos.tar.xz, das von der Schnitzeljagd benötigt wird
-# Die Werte (Größe & Azahl der Dateien) variiert, daher müssen die Werte nach dem Generieren eines neuen Chaoses in den Aufgaben aktualisiert werden:
+# Die Werte (Größe & Azahl der Dateien) variiert, daher müssen die Werte nach dem Generieren eines neuen Chaoses in folgenden Aufgaben aktualisiert werden:
 # src/exercises/14_wget.rb
 # src/exercises/15_tar.rb
 
@@ -128,7 +128,7 @@ puts "Removing generated files"
 puts "Done"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
 puts "The values of this chaos vary!"
-puts "After regenerating the chaos, remeber to update number of files and file size and the rebuild schnitzel!"
+puts "After regenerating the chaos, remember to update the number of files and file size and rebuild schnitzel!"
 puts "New expected file size for src/exercises/14_wget.rb: " + real_file_size.to_s
 puts "New expected file number for src/exercises/15_tar.rb: " +  real_file_number.to_s
 
