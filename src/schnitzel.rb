@@ -31,7 +31,10 @@ ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 WRONG_SOLUTION = "Leider falsch. Probieren Sie es noch einmal."
 
 # Correct solution
-CORRECT_SOLUTION = "Korrekt. Gut gemacht!"
+CORRECT_SOLUTION = "Korrekt."
+
+# Prais phrases for correct solutions
+CORRECT_SOLUTION_PRAISES = ["Gut gemacht!", "Großartig!", "Außerordentlich gut!", "Weiter so!", "Sehr gut gemacht!", "Prima!", "Super Leistung!", "Top Leistung!", "Top!", "Wunderbar!", "Toll!", "Spitze!", "Wundervoll!", "Herausragend!", "Hervorragend!", "Toll gemacht!", "Super!" , "Einsame Spitze!", "Grandios!", "Bravo!",  "Sensationell!", "Weiter so!", "Meisterhaft!", "Spitzenmäßig!", "Stark!", "Klasse gemacht!","Astrein!"]
 
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
@@ -53,7 +56,6 @@ WINNER_MESSAGE = %q{
  \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
 
 Alle Aufgaben gelöst. Herzlichen Glückwunsch!
-
 }
 
 # Some "arbitrary" file names

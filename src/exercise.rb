@@ -75,7 +75,6 @@ class Exercise
       end
 
     end while !passed
-
-    puts green("\n#{CORRECT_SOLUTION}\n")
+      puts green("\n#{CORRECT_SOLUTION} #{CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]}\n")
   end
 end
