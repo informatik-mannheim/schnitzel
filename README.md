@@ -12,6 +12,7 @@ The game was tested on
 
   * Ubuntu 19.04
   * Ubuntu 18.04
+  * Manjaro Linux 18.1
   * MacOS 10.14 (Mojave)
 
 ## Usage

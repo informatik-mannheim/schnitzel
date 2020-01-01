@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 # Generator für das chaos.tar.xz, das von der Schnitzeljagd benötigt wird
+# Die Werte (Größe & Azahl der Dateien) variiert, daher müssen die Werte nach dem Generieren eines neuen Chaoses in folgenden Aufgaben aktualisiert werden:
+# src/exercises/14_wget.rb
+# src/exercises/15_tar.rb
 
 require 'fileutils'
 
@@ -13,6 +16,8 @@ INCLUDE = %w{ ../files/kafka1.txt ../files/kafka2.txt ../files/wortliste.txt}
 SECRET = '#parmigiana4life#'
 
 # Number of files to be generated in total
+# Attention: The real number of files messured by Dir["#{PATH}/chaos/**/*"].count in  src/exercises/15_tar.rb varies!
+# After regenerating the chaos, the expacted value in src/exercises/15_tar.rb must be updated.
 NUM_FILES = 65538
 
 # Number of textfiles to be generated
@@ -106,14 +111,24 @@ File.write("#{TEMP_PATH}/data/#{path}/#{file_name}", generate_gibberish(size, tr
 # Copy the other content
 INCLUDE.each { |src| FileUtils.cp(src, TEMP_PATH) }
 
+# Real file number
+real_file_number = Dir["#{TEMP_PATH}/**/*"].count
+
 # Package folder
 puts "Packaging"
 `cd #{TEMP_PATH}/.. && tar cfJ chaos.tar.xz chaos`
 FileUtils.mv("#{TEMP_PATH}/../chaos.tar.xz", "../")
+
+# Real file size
+real_file_size = File.size("../chaos.tar.xz")
 
 # Remove temporary files
 puts "Removing generated files"
 
 puts "Done"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
+puts "The values of this chaos vary!"
+puts "After regenerating the chaos, remember to update the number of files and file size and rebuild schnitzel!"
+puts "New expected file size for src/exercises/14_wget.rb: " + real_file_size.to_s
+puts "New expected file number for src/exercises/15_tar.rb: " +  real_file_number.to_s
 
