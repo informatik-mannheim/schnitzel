@@ -144,5 +144,6 @@ patch_file('../src/exercises/15_tar.rb', /CHAOS_FILE_COUNT = \d+/, "CHAOS_FILE_C
 # do not make it into the final script
 puts "Rebuilding schnitzel"
 `./build.rb`
+
 # Fin
 puts "Done"
