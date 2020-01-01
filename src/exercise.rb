@@ -70,8 +70,11 @@ class Exercise
                  @check.call
                end
 
-      if (!passed)
+      if !passed
         puts red("\n#{WRONG_SOLUTION}\n")
+        motivation = WRONG_SOLUTION_MOTIVATION[rand(1..WRONG_SOLUTION_MOTIVATION.length)-1].strip.split("\n").map(&:strip)
+        motivation.map! { |line| fit(line, LINE_WIDTH) }
+        puts red("#{motivation.join("\n")}\n")
       end
 
     end while !passed

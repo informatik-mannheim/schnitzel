@@ -30,11 +30,14 @@ ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 # Wrong solution
 WRONG_SOLUTION = "Leider falsch. Probieren Sie es noch einmal."
 
+# Motivation phrases for wrong solutios
+WRONG_SOLUTION_MOTIVATION = ["Es ist noch kein Meister vom Himmel gefallen!", "Bitte geben Sie nicht auf!", "Sie können Ihre Zukunft verändern mit dem was Sie heute tun!", "Wer die Linux Console lernt, macht Fehler. Wer viel von der Linux Console lernt, macht mehr Fehler. Nur wer die Hände in den Schoss statt auf die Tatstur legt, macht gar keine Fehler.", "Selbst der schlimmste Fehler ist nicht so schlimm, wie es nie versucht zu haben! Weiter versuchen!"]
+
 # Correct solution
 CORRECT_SOLUTION = "Korrekt."
 
 # Prais phrases for correct solutions
-CORRECT_SOLUTION_PRAISES = ["Gut gemacht!", "Großartig!", "Außerordentlich gut!", "Weiter so!", "Sehr gut gemacht!", "Prima!", "Super Leistung!", "Top Leistung!", "Top!", "Wunderbar!", "Toll!", "Spitze!", "Wundervoll!", "Herausragend!", "Hervorragend!", "Toll gemacht!", "Super!" , "Einsame Spitze!", "Grandios!", "Bravo!",  "Sensationell!", "Weiter so!", "Meisterhaft!", "Spitzenmäßig!", "Stark!", "Klasse gemacht!","Astrein!"]
+CORRECT_SOLUTION_PRAISES = ["Gut gemacht!", "Großartig!", "Außerordentlich gut!", "Weiter so!", "Sehr gut gemacht!", "Prima!", "Super Leistung!", "Top Leistung!", "Top!", "Wunderbar!", "Toll!", "Spitze!", "Wundervoll!", "Herausragend!", "Hervorragend!", "Toll gemacht!", "Super!" , "Einsame Spitze!", "Grandios!", "Bravo!",  "Sensationell!", "Weiter so!", "Meisterhaft!", "Spitzenmäßig!", "Stark!", "Klasse gemacht!", "Astrein!"]
 
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
