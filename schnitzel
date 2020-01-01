@@ -141,13 +141,17 @@ class Exercise
 
       if !passed
         puts red("\n#{WRONG_SOLUTION}\n")
+
+        # format the motivation in the same way as the task
         motivation = WRONG_SOLUTION_MOTIVATION[rand(1..WRONG_SOLUTION_MOTIVATION.length)-1].strip.split("\n").map(&:strip)
         motivation.map! { |line| fit(line, LINE_WIDTH) }
+
         puts red("#{motivation.join("\n")}\n")
       end
 
     end while !passed
-      puts green("\n#{CORRECT_SOLUTION} #{CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]}\n")
+      prais = CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]
+      puts green("\n#{CORRECT_SOLUTION} #{prais}\n")
   end
 end
 
