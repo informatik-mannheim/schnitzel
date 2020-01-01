@@ -12,8 +12,8 @@ INCLUDE = %w{ ../files/kafka1.txt ../files/kafka2.txt ../files/wortliste.txt}
 SECRET = '#parmigiana4life#'
 
 # Number of files to be generated in total
-# Attention: The real number of files messured by Dir["#{PATH}/chaos/**/*"].count in  src/exercises/15_tar.rb varies!
-# After regenerating the chaos, the expacted value in src/exercises/15_tar.rb must be updated.
+# Attention: The real number of files messured by Dir["#{PATH}/chaos/**/*"].count in varies!
+# therefore the corresponding exercises are patched (see below)
 NUM_FILES = 65538
 
 # Number of textfiles to be generated
