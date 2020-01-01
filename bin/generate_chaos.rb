@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Generator für das chaos.tar.xz, das von der Schnitzeljagd benötigt wird
+# Generator for the file chaos.tar.xz used by the schnitzel game
 require 'fileutils'
 
 # Where to store temporary files?
