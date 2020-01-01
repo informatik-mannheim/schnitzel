@@ -1,5 +1,5 @@
 # tar
-CHAOS_FILE_COUNT = 66894
+CHAOS_FILE_COUNT = 66891
 
 @exercises << Exercise.new(
     'Archive',
