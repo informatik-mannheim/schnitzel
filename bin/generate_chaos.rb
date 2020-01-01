@@ -1,9 +1,5 @@
 #!/usr/bin/env ruby
 # Generator für das chaos.tar.xz, das von der Schnitzeljagd benötigt wird
-# Die Werte (Größe & Azahl der Dateien) variiert, daher müssen die Werte nach dem Generieren eines neuen Chaoses in folgenden Aufgaben aktualisiert werden:
-# src/exercises/14_wget.rb
-# src/exercises/15_tar.rb
-
 require 'fileutils'
 
 # Where to store temporary files?
@@ -92,6 +88,17 @@ def generate_files(num, extension)
   end
 end
 
+##
+# Patches the given file
+# @param path String path to file
+# @param regex Regex pattern to search for
+# @param replacement String replacement for pattern
+def patch_file(path, regex, replacement)
+  contents = File.read(path)
+  contents.gsub!(regex, replacement)
+  File.write(path, contents)
+end
+
 # Remove temporary directory if already present
 puts "Removing old tree"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
@@ -111,7 +118,7 @@ File.write("#{TEMP_PATH}/data/#{path}/#{file_name}", generate_gibberish(size, tr
 # Copy the other content
 INCLUDE.each { |src| FileUtils.cp(src, TEMP_PATH) }
 
-# Real file number
+# Get file number
 real_file_number = Dir["#{TEMP_PATH}/**/*"].count
 
 # Package folder
@@ -119,16 +126,19 @@ puts "Packaging"
 `cd #{TEMP_PATH}/.. && tar cfJ chaos.tar.xz chaos`
 FileUtils.mv("#{TEMP_PATH}/../chaos.tar.xz", "../")
 
-# Real file size
+# Get file file size
 real_file_size = File.size("../chaos.tar.xz")
 
 # Remove temporary files
 puts "Removing generated files"
-
-puts "Done"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
-puts "The values of this chaos vary!"
-puts "After regenerating the chaos, remember to update the number of files and file size and rebuild schnitzel!"
-puts "New expected file size for src/exercises/14_wget.rb: " + real_file_size.to_s
-puts "New expected file number for src/exercises/15_tar.rb: " +  real_file_number.to_s
 
+# Patch the corresponding exercises regarding file size and number of files
+puts "Patching 14_wget.rb"
+patch_file('../src/exercises/14_wget.rb', /CHAOS_SIZE = \d+/, "CHAOS_SIZE = #{real_file_size}")
+
+puts "Patching 15_tar.rb"
+patch_file('../src/exercises/15_tar.rb', /CHAOS_FILE_COUNT = \d+/, "CHAOS_FILE_COUNT = #{real_file_number}")
+
+# Fin
+puts "Done"
