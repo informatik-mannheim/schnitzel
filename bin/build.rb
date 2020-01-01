@@ -26,6 +26,6 @@ File.open("#{prefix}/schnitzel", 'w') do |out|
   end
 end
 
-# Set the exectuable bit
+# Set the executable bit
 File.chmod(0755, '../schnitzel')
 
