@@ -549,7 +549,7 @@ end
 )
 
 # wget
-CHAOS_SIZE = 2350280
+CHAOS_SIZE = 2352004
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
@@ -567,7 +567,7 @@ CHAOS_SIZE = 2350280
 )
 
 # tar
-CHAOS_FILE_COUNT = 66894
+CHAOS_FILE_COUNT = 66893
 
 @exercises << Exercise.new(
     'Archive',
