@@ -1,4 +1,6 @@
 # wget
+CHAOS_SIZE = 2350280
+
 @exercises << Exercise.new(
     'Ein neues Kapitel',
     'Mache Sie sich mit der Funktionsweise von wget vertraut.',
@@ -11,5 +13,5 @@
     },
     :enter,
     "wget #{CHAOS_URL}",
-    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == 2330500 }
+    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
 )

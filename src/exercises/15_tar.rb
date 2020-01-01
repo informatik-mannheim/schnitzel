@@ -1,4 +1,6 @@
 # tar
+CHAOS_FILE_COUNT = 66894
+
 @exercises << Exercise.new(
     'Archive',
     'Machen Sie sich mit der Funktionsweise von tar vertraut.',
@@ -9,5 +11,5 @@
     },
     :enter,
     'tar -xJf chaos.tar.xz',
-    -> () { Dir.exists?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == 66899 }
+    -> () { Dir.exists?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == CHAOS_FILE_COUNT }
 )
