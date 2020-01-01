@@ -126,7 +126,7 @@ puts "Packaging"
 `cd #{TEMP_PATH}/.. && tar cfJ chaos.tar.xz chaos`
 FileUtils.mv("#{TEMP_PATH}/../chaos.tar.xz", "../")
 
-# Get file file size
+# Get file size
 real_file_size = File.size("../chaos.tar.xz")
 
 # Remove temporary files
