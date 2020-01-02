@@ -31,7 +31,7 @@ ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 WRONG_SOLUTION = "Leider falsch. Probieren Sie es noch einmal."
 
 # Motivation phrases for wrong solutios
-WRONG_SOLUTION_MOTIVATION = ["Es ist noch kein Meister vom Himmel gefallen!", "Bitte geben Sie nicht auf!", "Sie können Ihre Zukunft verändern mit dem was Sie heute tun!", "Wer die Linux Console lernt, macht Fehler. Wer viel von der Linux Console lernt, macht mehr Fehler. Nur wer die Hände in den Schoss statt auf die Tatstur legt, macht gar keine Fehler.", "Selbst der schlimmste Fehler ist nicht so schlimm, wie es nie versucht zu haben! Weiter versuchen!"]
+WRONG_SOLUTION_MOTIVATION = ["Es ist noch kein Meister vom Himmel gefallen!", "Bitte geben Sie nicht auf!", "Sie können Ihre Zukunft verändern mit dem was Sie heute tun!", "Wer die Linux Console lernt, macht Fehler. Wer viel von der Linux Console lernt, macht mehr Fehler. Nur wer die Hände in den Schoß statt auf die Tastatur legt, macht gar keine Fehler.", "Selbst der schlimmste Fehler ist nicht so schlimm, wie es nie versucht zu haben! Weiter versuchen!"]
 
 # Correct solution
 CORRECT_SOLUTION = "Korrekt."
@@ -150,7 +150,7 @@ class Exercise
       end
 
     end while !passed
-      prais = CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]
+      praise = CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]
       puts green("\n#{CORRECT_SOLUTION} #{prais}\n")
   end
 end
@@ -466,7 +466,7 @@ end
 # whoami
 @exercises << Exercise.new(
     'Wer bin ich?',
-    'Mache Sie sich mit der Funktionsweise von whoami vertraut.',
+    'Machen Sie sich mit der Funktionsweise von whoami vertraut.',
     %Q{
       Finde Sie heraus, als _welcher Benutzer_ Sie im System angemeldet sind.
     },
@@ -564,7 +564,7 @@ CHAOS_SIZE = 2352004
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
-    'Mache Sie sich mit der Funktionsweise von wget vertraut.',
+    'Machen Sie sich mit der Funktionsweise von wget vertraut.',
     %Q{
       Sie haben sich auf eine karibische Insel abgesetzt und wollen dort mit einem Schnitzelrestaurant wieder neu anfangen, diesmal aber ohne zwielichtige Geschäftspraktiken. Noch in Deutschland haben Sie wichtige Dokumente archiviert und online gestellt.
 
@@ -596,7 +596,7 @@ CHAOS_FILE_COUNT = 66893
 # find / wc
 @exercises << Exercise.new(
     'Find what you search for',
-    'Mache Sie sich mit der Funktionsweise von find vertraut.',
+    'Machen Sie sich mit der Funktionsweise von find vertraut.',
     %Q{
       Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in `#{PROJEKT_PATH}/chaos` gespeichert sind.
 
