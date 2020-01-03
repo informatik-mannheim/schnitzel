@@ -81,7 +81,9 @@ class Exercise
       end
 
     end while !passed
-      praise = CORRECT_SOLUTION_PRAISES.sample
-      puts green("\n#{CORRECT_SOLUTION} #{praise}\n")
+
+    praise = CORRECT_SOLUTION_PRAISES.sample
+    puts green("\n#{CORRECT_SOLUTION} #{praise}\n")
+
   end
 end
