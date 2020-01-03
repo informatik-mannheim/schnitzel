@@ -151,7 +151,7 @@ class Exercise
 
     end while !passed
       praise = CORRECT_SOLUTION_PRAISES[rand(1..CORRECT_SOLUTION_PRAISES.length)-1]
-      puts green("\n#{CORRECT_SOLUTION} #{prais}\n")
+      puts green("\n#{CORRECT_SOLUTION} #{praise}\n")
   end
 end
 
