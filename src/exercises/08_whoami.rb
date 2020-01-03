@@ -1,7 +1,7 @@
 # whoami
 @exercises << Exercise.new(
     'Wer bin ich?',
-    'Mache Sie sich mit der Funktionsweise von whoami vertraut.',
+    'Machen Sie sich mit der Funktionsweise von whoami vertraut.',
     %Q{
       Finde Sie heraus, als _welcher Benutzer_ Sie im System angemeldet sind.
     },
