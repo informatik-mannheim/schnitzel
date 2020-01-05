@@ -29,7 +29,8 @@ You can directly execute the program from the `src` folder by starting the `schn
     - `schnitzel.rb` - The script's source (can also be executed but consists of multiple parts)
     - `helper.rb` - Helper functions
     - `exercise.rb` - The class for the exercises
-  * `schnitzel` - Game itself (only file needed on the target machine). Build it with `bin/build.rb`.
+    - `Makefile` - Simple make file to build the whole schnitzel experience
+  * `schnitzel` - Game itself (only file needed on the target machine). Build it with `bin/build.rb` or `src/Makefule`.
   * `files` - files included during the creation of the `chaos.tar.xz`
   * `chaos.tar.xz` - file the students download during the exercise, containing additional material (see [files](files/) folder)
 
@@ -40,4 +41,3 @@ The game is developed by [Thomas Smits](https://github.com/thomsmits/).
 ## Acknowledgement
 
 This program is based on the idea of Eugen Krizki and Richard Vladimirskij and their framework [pepio](https://github.com/limecakeio/pepio). Due to the many dependencies and problems with the node.js based pepio, I decided to do a complete re-implementation and extension in Ruby. The goal was to have one single file which can be downloaded and executed easily.
-
