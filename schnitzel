@@ -30,8 +30,14 @@ ENTER_TEXT = "Drücken Sie <ENTER>, um die Lösung zu überprüfen:"
 # Wrong solution
 WRONG_SOLUTION = "Leider falsch. Probieren Sie es noch einmal."
 
+# Motivation phrases for wrong solutios
+WRONG_SOLUTION_MOTIVATION = ["Es ist noch kein Meister vom Himmel gefallen!", "Bitte geben Sie nicht auf!", "Sie können Ihre Zukunft verändern mit dem was Sie heute tun!", "Wer die Linux Console lernt, macht Fehler. Wer viel von der Linux Console lernt, macht mehr Fehler. Nur wer die Hände in den Schoß statt auf die Tastatur legt, macht gar keine Fehler.", "Selbst der schlimmste Fehler ist nicht so schlimm, wie es nie versucht zu haben! Weiter versuchen!"]
+
 # Correct solution
-CORRECT_SOLUTION = "Korrekt. Gut gemacht!"
+CORRECT_SOLUTION = "Korrekt."
+
+# Prais phrases for correct solutions
+CORRECT_SOLUTION_PRAISES = ["Gut gemacht!", "Großartig!", "Außerordentlich gut!", "Weiter so!", "Sehr gut gemacht!", "Prima!", "Super Leistung!", "Top Leistung!", "Top!", "Wunderbar!", "Toll!", "Spitze!", "Wundervoll!", "Herausragend!", "Hervorragend!", "Toll gemacht!", "Super!" , "Einsame Spitze!", "Grandios!", "Bravo!",  "Sensationell!", "Weiter so!", "Meisterhaft!", "Spitzenmäßig!", "Stark!", "Klasse gemacht!", "Astrein!"]
 
 # Location of the prepared tar
 CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
@@ -131,13 +137,19 @@ class Exercise
                  @check.call
                end
 
-      if (!passed)
+      if !passed
         puts red("\n#{WRONG_SOLUTION}\n")
+
+        # format the motivation in the same way as the task
+        motivation = WRONG_SOLUTION_MOTIVATION.sample.strip.split("\n").map(&:strip)
+        motivation.map! { |line| fit(line, LINE_WIDTH) }
+
+        puts red("#{motivation.join("\n")}\n")
       end
 
     end while !passed
-
-    puts green("\n#{CORRECT_SOLUTION}\n")
+      praise = CORRECT_SOLUTION_PRAISES.sample
+      puts green("\n#{CORRECT_SOLUTION} #{praise}\n")
   end
 end
 
@@ -384,7 +396,7 @@ end
     Das Verzeichnis `#{PROJEKT_PATH}` ist das Grundverzeichnis dieser Schnitzeljagd, Sie finden es immer als Unterordner des Verzeichnisses `#{BASE_PATH}`.
 
     Gehen Sie in das Verzeichnis `#{PROJEKT_PATH}` und legen Sie dort eine Datei mit dem Namen `film.txt` an, in die Sie "Pulp Fiction" schreiben. Verwenden Sie hierzu entweder den _Editor_ `vi` oder `nano`.
-},
+  },
   :enter,
   'cd ; cd linux-kurs ; echo "Pulp Fiction" > film.txt',
   -> () { f = "#{PATH}/film.txt"; File.exists?(f) && File.read(f).strip == "Pulp Fiction" },
@@ -479,7 +491,7 @@ end
 # whoami
 @exercises << Exercise.new(
     'Wer bin ich?',
-    'Mache Sie sich mit der Funktionsweise von whoami vertraut.',
+    'Machen Sie sich mit der Funktionsweise von whoami vertraut.',
     %Q{
       Finde Sie heraus, als _welcher Benutzer_ Sie im System angemeldet sind.
     },
@@ -577,7 +589,7 @@ CHAOS_SIZE = 2352004
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
-    'Mache Sie sich mit der Funktionsweise von wget vertraut.',
+    'Machen Sie sich mit der Funktionsweise von wget vertraut.',
     %Q{
       Sie haben sich auf eine karibische Insel abgesetzt und wollen dort mit einem Schnitzelrestaurant wieder neu anfangen, diesmal aber ohne zwielichtige Geschäftspraktiken. Noch in Deutschland haben Sie wichtige Dokumente archiviert und online gestellt.
 
@@ -609,7 +621,7 @@ CHAOS_FILE_COUNT = 66893
 # find / wc
 @exercises << Exercise.new(
     'Find what you search for',
-    'Mache Sie sich mit der Funktionsweise von find vertraut.',
+    'Machen Sie sich mit der Funktionsweise von find vertraut.',
     %Q{
       Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in `#{PROJEKT_PATH}/chaos` gespeichert sind.
 
@@ -728,6 +740,22 @@ CHAOS_FILE_COUNT = 66893
     'ps aux | grep sleep ; kill ...',
     -> () { `ps aux | grep sleep | grep -v "grep"`.strip == "" },
     -> () { p = fork { exec "sleep 100000" }; Process.detach(p) }
+)
+
+# cal
+@exercises << Exercise.new(
+    'Sag niemals nie.',
+    'Machen Sie sich mit der Funktionsweise "cal" vertraut.',
+    %Q{
+      An der Strandbar lernen Sie einen Ureinwohner der karibischen Insel kennen, der Ihnen eine Location für Ihr neues Schnitzelresturant vermieten könnte. Dieser behauptet, dass das Haus von seinen Vorfahren im kürzesten Monat des Jahres 1752 erbaut worden sei.
+      Als der Ureinwohner den Monat nennt, brechen Sie in Lachen aus: "Das war noch nie der kürzeste Monat eines Jahres!"
+      Zum Beweis lassen Sie sich mithilfe des Befehles `cal` den Überblick des Jahres 1752 anzeigen.
+
+     Finden Sie mithilfe der _Jahresübersicht des Befehls `cal`_ heraus, welcher Monat in dem Jahr 1752 der kürzeste Monat war und zählen Sie, wiviele einzelne Tage dieser laut `cal` hatte.
+    },
+    'Wie viele einzelne Tage hatte der kürzeste Monat des Jahres 1752 laut cal?',
+    'cal 1752',
+    -> () { input == '19' }
 )
 
 

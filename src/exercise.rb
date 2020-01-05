@@ -70,12 +70,20 @@ class Exercise
                  @check.call
                end
 
-      if (!passed)
+      if !passed
         puts red("\n#{WRONG_SOLUTION}\n")
+
+        # format the motivation in the same way as the task
+        motivation = WRONG_SOLUTION_MOTIVATION.sample.strip.split("\n").map(&:strip)
+        motivation.map! { |line| fit(line, LINE_WIDTH) }
+
+        puts red("#{motivation.join("\n")}\n")
       end
 
     end while !passed
 
-    puts green("\n#{CORRECT_SOLUTION}\n")
+    praise = CORRECT_SOLUTION_PRAISES.sample
+    puts green("\n#{CORRECT_SOLUTION} #{praise}\n")
+
   end
 end

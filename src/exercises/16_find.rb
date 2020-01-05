@@ -1,7 +1,7 @@
 # find / wc
 @exercises << Exercise.new(
     'Find what you search for',
-    'Mache Sie sich mit der Funktionsweise von find vertraut.',
+    'Machen Sie sich mit der Funktionsweise von find vertraut.',
     %Q{
       Sie wollen sich erstmal einen Überblick über Die wichtigsten Dokumente verschaffen, die alle als .txt-Dateien in `#{PROJEKT_PATH}/chaos` gespeichert sind.
 
