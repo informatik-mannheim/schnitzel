@@ -57,8 +57,6 @@ WINNER_MESSAGE = %q{
 | |    | '_ \ | | / __|| |/ // _ \| '_ \  | | | || || '_ \ | '_ \  / _ \| '__|
 | \__/\| | | || || (__ |   <|  __/| | | | | |/ / | || | | || | | ||  __/| |
  \____/|_| |_||_| \___||_|\_\\\\___||_| |_| |___/  |_||_| |_||_| |_| \___||_|
-
-Alle Aufgaben gelöst. Herzlichen Glückwunsch!
 }
 
 # Some "arbitrary" file names
@@ -142,3 +140,5 @@ end
 puts "#{cls}"
 print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH)
 puts green(WINNER_MESSAGE)
+needed_time = ((Time.now - first_start_time_from_log)/60).round
+puts green("Sie haben alle Aufgaben in #{needed_time} Minuten gelöst. Herzlichen Glückwunsch!")

@@ -2,6 +2,9 @@
 # Helper functions
 # ------------
 
+require 'time'
+
+
 ##
 # Get an input from stdin
 # @return String the data
@@ -125,17 +128,39 @@ def next_exercise_from_log
   if File.exists?(LOG_FILE)
     contents = File.readlines(LOG_FILE)
     start = contents.last.split("\t").first.to_i + 1
+  else
+    log('-1', 'first run')
   end
   start
+end
+
+##
+# Get the last exercise from the log file, if present. Otherwise
+# return 0
+# @return the last exercise sucessfully performed
+def first_start_time_from_log
+  time = Time.local(1900, 1, 1)
+  if File.exists?(LOG_FILE)
+    contents = File.readlines(LOG_FILE)
+    time = Time.parse(contents.first.split("\t")[3].to_s)
+  end
+  time
 end
 
 ##
 # Log the sucess of an exercise
 # @param index the index of the exercise performed
 def log_success(index, exercise)
+  log(index, exercise.title)
+end
+
+##
+# Log the event
+# @param index the index of the exercise performed
+def log(index, title)
   create_workdir
   File.open(LOG_FILE, "a") do |f|
-    f.print("#{index}\t#{ENV['USER']}\t'#{exercise.title}'\t#{Time.new}\n")
+    f.print("#{index}\t#{ENV['USER']}\t'#{title}'\t#{Time.new}\n")
   end
 end
 
