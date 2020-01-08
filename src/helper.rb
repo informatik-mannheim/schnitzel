@@ -148,6 +148,18 @@ def get_first_starttime
 end
 
 ##
+# Get the last modification time from the log file = the date  when the user
+# finished schnitzel, if present. Otherwise return 1.1.1900
+# @return the date obj when the user finished schnitzel
+def get_end_time
+  time = Time.local(1900, 1, 1)
+  if File.exists?(LOG_FILE)
+    time = File.mtime(LOG_FILE)
+  end
+  time
+end
+
+##
 # Log the sucess of an exercise
 # @param index the index of the exercise performed
 def log_success(index, exercise)
