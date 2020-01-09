@@ -135,14 +135,26 @@ def next_exercise_from_log
 end
 
 ##
-# Get the last exercise from the log file, if present. Otherwise
-# return 0
-# @return the last exercise sucessfully performed
-def first_start_time_from_log
+# Get the start time from log, if log file is present. Otherwise
+# return 1.1.1900
+# @return the time obj of first run
+def get_first_starttime
   time = Time.local(1900, 1, 1)
   if File.exists?(LOG_FILE)
     contents = File.readlines(LOG_FILE)
     time = Time.parse(contents.first.split("\t")[3].to_s)
+  end
+  time
+end
+
+##
+# Get the last modification time from the log file = the date  when the user
+# finished schnitzel, if present. Otherwise return 1.1.1900
+# @return the date obj when the user finished schnitzel
+def get_end_time
+  time = Time.local(1900, 1, 1)
+  if File.exists?(LOG_FILE)
+    time = File.mtime(LOG_FILE)
   end
   time
 end
