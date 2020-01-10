@@ -812,4 +812,4 @@ puts "#{cls}"
 print progress_bar(@exercises.length, @exercises.length, LINE_WIDTH)
 puts green(WINNER_MESSAGE)
 needed_time = ((get_end_time - get_first_starttime)/60).round
-puts green("Sie haben alle Aufgaben in #{needed_time} Minuten gelöst. Herzlichen Glückwunsch!")
+puts green("Sie haben alle Aufgaben in #{needed_time} Minuten gelöst. Herzlichen Glückwunsch!\n")
