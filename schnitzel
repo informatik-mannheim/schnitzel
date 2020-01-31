@@ -654,7 +654,6 @@ CHAOS_FILE_COUNT = 66893
     -> () { input.to_i == 32771 }
 )
 
-
 # grep
 @exercises << Exercise.new(
     'Find the key',
@@ -802,7 +801,7 @@ CHAOS_FILE_COUNT = 66893
     end
 )
 
-# df
+# du
 @exercises << Exercise.new(
     'Es kommt doch auf die Größe an.',
     'Machen Sie sich mit der Funktionsweise von "du" vertraut.',

@@ -28,4 +28,3 @@ end
 
 # Set the executable bit
 File.chmod(0755, '../schnitzel')
-

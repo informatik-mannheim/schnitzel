@@ -11,4 +11,3 @@
     'find chaos/ -name "*.txt" | wc',
     -> () { input.to_i == 32771 }
 )
-
