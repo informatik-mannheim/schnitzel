@@ -10,9 +10,9 @@ The game is based on Ruby and requires at least Ruby 2.4 to run. No additional G
 
 The game was tested on
 
-  * Ubuntu 19.04
-  * Ubuntu 18.04
-  * Manjaro Linux 18.1
+  * [Ubuntu 19.04](http://releases.ubuntu.com/19.04/)
+  * [Ubuntu 18.04](http://releases.ubuntu.com/18.04/)
+  * [Manjaro Linux 18.1](https://manjaro.org/download/)
   * MacOS 10.14 (Mojave)
 
 ## Usage
