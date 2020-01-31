@@ -8,12 +8,14 @@
       Benutzen Sie das Kommando `df`, um herauszufinden, wie viel Platz noch auf Ihrer Root-Partition (`/`) ist.
     },
     'Wie viel Platz haben Sie (in Gigabyte)?',
-    'df /',
+    'df -P -B G /',
     -> (os) do
-       if os == :linux
-         input == `df -P -B G /`.split(/\b/)[28].to_i.to_s
+       # Way to determine free space is really hacky but we would like
+       # to avoid pulling additional gems like sys/filesystem or similar
+       input == if os == :linux
+         `df -P -B G /`.split(/\b/)[28].to_i.to_s
        elsif os == :macos
-         input == `df -P -g /`.split(/\b/)[24].to_i.to_s
+         `df -P -g /`.split(/\b/)[24].to_i.to_s
        end
     end
 )
