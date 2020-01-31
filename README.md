@@ -29,6 +29,7 @@ You can directly execute the program from the `src` folder by starting the `schn
     - `schnitzel.rb` - The script's source (can also be executed but consists of multiple parts)
     - `helper.rb` - Helper functions
     - `exercise.rb` - The class for the exercises
+    - `settings.rb` - Settings for the program (pathnames etc.)
     - `Makefile` - Simple make file to build the whole schnitzel experience
   * `schnitzel` - Game itself (only file needed on the target machine). Build it with `bin/build.rb` or `src/Makefile`.
   * `files` - files included during the creation of the `chaos.tar.xz`
