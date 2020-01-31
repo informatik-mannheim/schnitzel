@@ -9,5 +9,5 @@
     },
     'Wie lautet der Unterschied?',
     'diff kafka1.txt kafka2.txt',
-    -> () { input == "Informatik ist cool" }
+    -> () { read_console == "Informatik ist cool" }
 )

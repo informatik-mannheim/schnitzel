@@ -9,5 +9,5 @@
     },
     'Trage hier ein, wieviele .txt-Dateien im Ordner vorhanden sind:',
     'find chaos/ -name "*.txt" | wc',
-    -> () { input.to_i == 32771 }
+    -> () { read_console_i == 32771 }
 )

@@ -9,5 +9,5 @@
     },
     'Wie lautet das gesuchte Kommando (inklusive ls)?',
     'ls -t',
-    -> () { input == 'ls -t' }
+    -> () { read_console == 'ls -t' }
 )

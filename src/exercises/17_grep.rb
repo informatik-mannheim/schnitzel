@@ -13,5 +13,5 @@
     },
     'Wie lautet das magische Passwort (ohne die #)?',
     'grep -roh "#.*#"',
-    -> () { input == "parmigiana4life" }
+    -> () { read_console == "parmigiana4life" }
 )

@@ -168,14 +168,14 @@ require 'time'
 ##
 # Get an input from stdin
 # @return String the data
-def input
+def read_console
   $stdin.gets.strip
 end
 
 ##
 # Get an input from stdin and convert to an integer
 # @return Integer the data
-def input_i
+def read_console_i
   $stdin.gets.strip.to_i
 end
 
@@ -405,7 +405,7 @@ end
     },
     'Wie lautet das gesuchte Kommando (inklusive ls)?',
     'ls -t',
-    -> () { input == 'ls -t' }
+    -> () { read_console == 'ls -t' }
 )
 
 # vi / nano
@@ -453,7 +453,7 @@ end
   },
   'Welchen Preis hat das Wiener Schnitzel?',
   'less speisekarte.txt',
-  -> () { input == "23,42" },
+  -> () { read_console == "23,42" },
   -> () { File.write("#{PATH}/speisekarte.txt", "Wiener Schnitzel 23,42\nJägerschnitzel 28,44\nBauernschnitzel 24,13\n") }
 )
 
@@ -519,7 +519,7 @@ end
     },
     'Tragen Sie hier ein, wie Ihr Benutzer heißt:',
     'whoami',
-    -> () { input == ENV['USER'] }
+    -> () { read_console == ENV['USER'] }
 )
 
 # ls -axl
@@ -533,7 +533,7 @@ end
     },
     'Trage Sie hier den Namen des Besitzers ein:',
     'ls -axl',
-    -> () { input == ENV['USER'] },
+    -> () { read_console == ENV['USER'] },
     -> () { mkdir("#{PATH}/shady-business", 0700) }
 )
 
@@ -651,7 +651,7 @@ CHAOS_FILE_COUNT = 66893
     },
     'Trage hier ein, wieviele .txt-Dateien im Ordner vorhanden sind:',
     'find chaos/ -name "*.txt" | wc',
-    -> () { input.to_i == 32771 }
+    -> () { read_console_i == 32771 }
 )
 
 # grep
@@ -669,7 +669,7 @@ CHAOS_FILE_COUNT = 66893
     },
     'Wie lautet das magische Passwort (ohne die #)?',
     'grep -roh "#.*#"',
-    -> () { input == "parmigiana4life" }
+    -> () { read_console == "parmigiana4life" }
 )
 
 # diff
@@ -683,7 +683,7 @@ CHAOS_FILE_COUNT = 66893
     },
     'Wie lautet der Unterschied?',
     'diff kafka1.txt kafka2.txt',
-    -> () { input == "Informatik ist cool" }
+    -> () { read_console == "Informatik ist cool" }
 )
 
 # sort / uniq / > / |
@@ -776,7 +776,7 @@ CHAOS_FILE_COUNT = 66893
     },
     'Wie viele einzelne Tage hatte der kürzeste Monat des Jahres 1752 laut cal?',
     'cal 1752',
-    -> () { input == '19' }
+    -> () { read_console == '19' }
 )
 
 # df
@@ -793,7 +793,7 @@ CHAOS_FILE_COUNT = 66893
     -> (os) do
        # Way to determine free space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input_i == if os == :linux
+       read_console_i == if os == :linux
          `df -P -B G /`.split(/\b/)[28].to_i
        elsif os == :macos
          `df -P -g /`.split(/\b/)[24].to_i
@@ -815,7 +815,7 @@ CHAOS_FILE_COUNT = 66893
     -> (os) do
        # Way to determine used space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input_i == if os == :linux
+       read_console_i == if os == :linux
          `du -d0 -P -B M #{PATH}/chaos`.split(/\b/)[0].to_i
        elsif os == :macos
          `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i

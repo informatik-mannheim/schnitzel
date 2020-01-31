@@ -9,6 +9,6 @@
     },
     'Trage Sie hier den Namen des Besitzers ein:',
     'ls -axl',
-    -> () { input == ENV['USER'] },
+    -> () { read_console == ENV['USER'] },
     -> () { mkdir("#{PATH}/shady-business", 0700) }
 )

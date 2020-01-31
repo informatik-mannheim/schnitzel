@@ -7,14 +7,14 @@ require 'time'
 ##
 # Get an input from stdin
 # @return String the data
-def input
+def read_console
   $stdin.gets.strip
 end
 
 ##
 # Get an input from stdin and convert to an integer
 # @return Integer the data
-def input_i
+def read_console_i
   $stdin.gets.strip.to_i
 end
 

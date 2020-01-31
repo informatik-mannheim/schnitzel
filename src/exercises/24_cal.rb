@@ -11,5 +11,5 @@
     },
     'Wie viele einzelne Tage hatte der kürzeste Monat des Jahres 1752 laut cal?',
     'cal 1752',
-    -> () { input == '19' }
+    -> () { read_console == '19' }
 )

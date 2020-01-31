@@ -11,6 +11,6 @@
   },
   'Welchen Preis hat das Wiener Schnitzel?',
   'less speisekarte.txt',
-  -> () { input == "23,42" },
+  -> () { read_console == "23,42" },
   -> () { File.write("#{PATH}/speisekarte.txt", "Wiener Schnitzel 23,42\nJägerschnitzel 28,44\nBauernschnitzel 24,13\n") }
 )

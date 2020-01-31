@@ -7,5 +7,5 @@
     },
     'Tragen Sie hier ein, wie Ihr Benutzer heißt:',
     'whoami',
-    -> () { input == ENV['USER'] }
+    -> () { read_console == ENV['USER'] }
 )
