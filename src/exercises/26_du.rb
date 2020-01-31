@@ -1,4 +1,4 @@
-# df
+# du
 @exercises << Exercise.new(
     'Es kommt doch auf die Größe an.',
     'Machen Sie sich mit der Funktionsweise von "du" vertraut.',
