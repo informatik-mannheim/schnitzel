@@ -5,6 +5,7 @@
 # siehe https://github.com/limecakeio/pepio
 # (c) 2019 Thomas Smits
 
+# Settings and constants
 # ------------
 # Constants
 # ------------
@@ -63,6 +64,7 @@ WINNER_MESSAGE = %q{
 FILENAMES = %w{ Battlefield BioShock Borderlands Burnout Castlevania Crysis Deponia
                 Doom Elite Fallout Halo Hitman Minecraft Payday Prey Quake Rayman Risen
                 Splatoon Thief Uncharted Witcher Wolfenstein Yakuza Zork }
+
 
 # Class for the definition of exercises
 ##
@@ -403,7 +405,7 @@ end
 # vi / nano
 @exercises << Exercise.new(
   'Erstkontakt',
-  'Lernen Sie in Verzeichnisse zu wechseln (cd) und Dateien zu editieren (vi / nano).',
+  'Lernen Sie in Verzeichnisse zu wechseln (`cd`) und Dateien zu editieren (`vi` / `nano`).',
   %Q{
     Sie möchten eine Datei mit Ihrem Lieblingsfilm anlegen - der übrigens "_Pulp Fiction_" heißt.
 
