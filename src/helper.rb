@@ -4,7 +4,6 @@
 
 require 'time'
 
-
 ##
 # Get an input from stdin
 # @return String the data
