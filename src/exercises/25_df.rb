@@ -12,10 +12,10 @@
     -> (os) do
        # Way to determine free space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input == if os == :linux
-         `df -P -B G /`.split(/\b/)[28].to_i.to_s
+       input_i == if os == :linux
+         `df -P -B G /`.split(/\b/)[28].to_i
        elsif os == :macos
-         `df -P -g /`.split(/\b/)[24].to_i.to_s
+         `df -P -g /`.split(/\b/)[24].to_i
        end
     end
 )

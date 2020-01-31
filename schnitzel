@@ -173,6 +173,13 @@ def input
 end
 
 ##
+# Get an input from stdin and convert to an integer
+# @return Integer the data
+def input_i
+  $stdin.gets.strip.to_i
+end
+
+##
 # Create a directory (if not already present) and set
 # the protections according to the given mask
 # @param path String path to the directory
@@ -787,10 +794,10 @@ CHAOS_FILE_COUNT = 66893
     -> (os) do
        # Way to determine free space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input == if os == :linux
-         `df -P -B G /`.split(/\b/)[28].to_i.to_s
+       input_i == if os == :linux
+         `df -P -B G /`.split(/\b/)[28].to_i
        elsif os == :macos
-         `df -P -g /`.split(/\b/)[24].to_i.to_s
+         `df -P -g /`.split(/\b/)[24].to_i
        end
     end
 )
@@ -809,10 +816,10 @@ CHAOS_FILE_COUNT = 66893
     -> (os) do
        # Way to determine used space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input == if os == :linux
-         `du -d0 -P -B M #{PATH}/chaos`.split(/\b/)[0].to_i.to_s
+       input_i == if os == :linux
+         `du -d0 -P -B M #{PATH}/chaos`.split(/\b/)[0].to_i
        elsif os == :macos
-         `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i.to_s
+         `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i
        end
     end
 )

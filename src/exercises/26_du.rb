@@ -12,10 +12,10 @@
     -> (os) do
        # Way to determine used space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
-       input == if os == :linux
-         `du -d0 -P -B M #{PATH}/chaos`.split(/\b/)[0].to_i.to_s
+       input_i == if os == :linux
+         `du -d0 -P -B M #{PATH}/chaos`.split(/\b/)[0].to_i
        elsif os == :macos
-         `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i.to_s
+         `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i
        end
     end
 )

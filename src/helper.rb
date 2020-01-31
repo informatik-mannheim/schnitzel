@@ -12,6 +12,13 @@ def input
 end
 
 ##
+# Get an input from stdin and convert to an integer
+# @return Integer the data
+def input_i
+  $stdin.gets.strip.to_i
+end
+
+##
 # Create a directory (if not already present) and set
 # the protections according to the given mask
 # @param path String path to the directory
