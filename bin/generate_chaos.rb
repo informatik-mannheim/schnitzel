@@ -140,6 +140,9 @@ patch_file('../src/exercises/14_wget.rb', /CHAOS_SIZE = \d+/, "CHAOS_SIZE = #{re
 puts "Patching 15_tar.rb"
 patch_file('../src/exercises/15_tar.rb', /CHAOS_FILE_COUNT = \d+/, "CHAOS_FILE_COUNT = #{real_file_number}")
 
+puts "Patching 16_find.rb"
+patch_file('../src/exercises/16_find.rb', /CHAOS_TXT_FILE_COUNT = \d+/, "CHAOS_TXT_FILE_COUNT = #{NUM_TXT_FILES}")
+
 # We must rebuild the schnitzel script because otherwise the patched numbers
 # do not make it into the final script
 puts "Rebuilding schnitzel"
