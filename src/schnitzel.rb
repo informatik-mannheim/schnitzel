@@ -47,6 +47,7 @@ require_relative 'exercises/23_ps_kill.rb'
 require_relative 'exercises/24_cal.rb'
 require_relative 'exercises/25_df.rb'
 require_relative 'exercises/26_du.rb'
+require_relative 'exercises/27_bc.rb'
 
 start = next_exercise_from_log
 
