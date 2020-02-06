@@ -9,6 +9,8 @@
       Da Sie dem Finanzamtmitarbeiter nicht trauen, beschließen Sie, diese Zahlen mit Ihrem Rechner auf Plausibilität zu prüfen.
 
       Benutzen Sie das Kommando `bc`, um herauszufinden, wieviel 3108 hoch 2000 beträgt.
+
+      Tipp: Das Ergebnis wird von bc in mehrere Zeilen unterteilt. Diese sind mit einem "\\" getrennt.
     },
     'Geben Sie hier die letzte Zeile des Ergebnisses an:',
     'echo "3108^2000" | bc',
