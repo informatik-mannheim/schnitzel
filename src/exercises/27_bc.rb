@@ -11,7 +11,7 @@
       Benutzen Sie das Kommando `bc`, um herauszufinden, wieviel 3108 hoch 2000 beträgt.
     },
     'Geben Sie hier die letzte Zeile des Ergebnisses an:',
-    'echo "(3108^2000)" | bc',
+    'echo "3108^2000" | bc',
     -> () { read_console == '9443143978953998187590546511579035962672599269376' }
 )
 
