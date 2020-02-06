@@ -8,7 +8,7 @@
       Benutzen Sie das Kommando `du`, um herauszufinden, wie viel Platz alle Dateien im Ordner `#{PROJEKT_PATH}/chaos` zusammen verbrauchen.
     },
     'Wie viel Platz (in Megabyte) verbraucht der Ordner chaos?',
-    "du -h #{PROJEKT_PATH}/chaos",
+    'du -h #{PROJEKT_PATH}/chaos',
     -> (os) do
        # Way to determine used space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar
