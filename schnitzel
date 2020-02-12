@@ -641,6 +641,8 @@ CHAOS_FILE_COUNT = 66893
 )
 
 # find / wc
+CHAOS_TXT_FILE_COUNT = 32771
+
 @exercises << Exercise.new(
     'Find what you search for',
     'Machen Sie sich mit der Funktionsweise von find, wc und Pipes zur Ausgabeumleitung (|) vertraut.',
@@ -651,7 +653,7 @@ CHAOS_FILE_COUNT = 66893
     },
     'Trage hier ein, wieviele .txt-Dateien im Ordner vorhanden sind:',
     'find chaos/ -name "*.txt" | wc',
-    -> () { read_console_i == 32771 }
+    -> () { read_console_i == CHAOS_TXT_FILE_COUNT }
 )
 
 # grep
@@ -820,6 +822,54 @@ CHAOS_FILE_COUNT = 66893
        elsif os == :macos
          `du -P -d0 -m #{PATH}/chaos`.split(/\b/)[0].to_i
        end
+    end
+)
+
+# bc
+@exercises << Exercise.new(
+    'Kein unkalkuliertes Business!',
+    'Machen Sie sich mit der Funktionsweise von "bc" vertraut.',
+    %Q{
+      Jetzt wo Sie wissen, wieviel Schnitzelrezepte Sie noch speichern können, fragen Sie sich, wieviele Schnitzel Sie auf dieser Insel verkaufen können.
+      Kurzerhand entscheiden Sie sich mithilfe einer Bestechung an die Verkaufszahlen der Konkurrenz zu kommen.
+      Nachdem Sie einen Finanzamtmitarbeiter mit einem Schnitzel bestochen haben, lässt dieser fallen, dass der Umsatz Ihres Konkurrenten etwa 3108 hoch 2000 beträgt.
+      Da Sie dem Finanzamtmitarbeiter nicht trauen, beschließen Sie, diese Zahlen mit Ihrem Rechner auf Plausibilität zu prüfen.
+
+      Benutzen Sie das Kommando `bc`, um herauszufinden, wieviel 3108 hoch 2000 beträgt.
+
+      Tipp: Das Ergebnis wird von bc in mehrere Zeilen unterteilt. Diese sind mit einem "\\" getrennt.
+    },
+    'Geben Sie hier die letzte Zeile des Ergebnisses an:',
+    'echo "3108^2000" | bc',
+    -> () { read_console == '9443143978953998187590546511579035962672599269376' }
+)
+
+
+# tr
+SPEISEKARTE = "Speisekarte\n\n" +
+          "Jägerschnitzel        12,80\n" +
+          "Wiener Schnitzel      10,70\n" +
+          "Schnitzel ohne Pommes  9,88\n" +
+          "Bier (0,3l)            2,70\n" +
+          "Coca Cola (0,33l)      2,50\n"
+
+@exercises << Exercise.new(
+    '1337 Verschlüsselung.',
+    'Machen Sie sich mit der Funktionsweise von "tr" vertraut.',
+    %Q{
+      Sie haben Sorgen, dass die Konkurrenz Ihre Schnitzelpreise erfährt. Deswegen haben Sie sich entschlossen, Ihre Speisekarte mit mit dem Leet-Verfahren (auch als 1337 bekannt) zu verschlüsseln. Hierzu ersetzen Sie jedes Vorkommen des Buchstaben `a`, `e`, `i`, `o`, `t` jeweils durch `4`, `3`, `1`, `0`, `7`.
+
+      Nehmen Sie die Textdatei `speisekarte.txt` aus `#{PROJEKT_PATH}` und erzeugen Sie mit `tr` eine verschlüsselte Version namens `speisekarte-geheim.txt`, die Sie im selben Ordner ablegen.
+    },
+    :enter,
+    'cat speisekarte.txt | tr "aeiot" "43107" > speisekarte-geheim.txt',
+    -> () do
+      contents = File.read("#{PATH}/speisekarte-geheim.txt") rescue ""
+      contents == SPEISEKARTE.tr("aeiot", "43107")
+    end,
+    -> () do
+      create_workdir
+      File.write("#{PATH}/speisekarte.txt", SPEISEKARTE)
     end
 )
 
