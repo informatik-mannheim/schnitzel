@@ -134,8 +134,8 @@ puts "Removing generated files"
 FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
 
 # Patch the corresponding exercises regarding file size and number of files
-puts "Patching 14_wget.rb"
-patch_file('../src/exercises/14_wget.rb', /CHAOS_SIZE = \d+/, "CHAOS_SIZE = #{real_file_size}")
+puts "Patching 14_wget_curl.rb"
+patch_file('../src/exercises/14_wget_curl.rb', /CHAOS_SIZE = \d+/, "CHAOS_SIZE = #{real_file_size}")
 
 puts "Patching 15_tar.rb"
 patch_file('../src/exercises/15_tar.rb', /CHAOS_FILE_COUNT = \d+/, "CHAOS_FILE_COUNT = #{real_file_number}")
