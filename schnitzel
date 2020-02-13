@@ -449,7 +449,7 @@ end
 
     Zum Glück haben Sie die Speisekarte in der Datei `speisekarte.txt` im `#{PROJEKT_PATH}`-Ordner gespeichert.
 
-    Schaue Sie in der Datei nach dem _Preis für ein Wiener Schnitzel_.
+    Schauen Sie in der Datei nach dem _Preis für ein Wiener Schnitzel_.
   },
   'Welchen Preis hat das Wiener Schnitzel?',
   'less speisekarte.txt',
@@ -606,12 +606,12 @@ end
     -> () { !File.exists?("#{PATH}/nothing-to-see-here") }
 )
 
-# wget
+# wget or curl
 CHAOS_SIZE = 2352004
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
-    'Machen Sie sich mit der Funktionsweise von wget vertraut.',
+    'Machen Sie sich mit der Funktionsweise von wget oder curl vertraut.',
     %Q{
       Sie haben sich auf eine karibische Insel abgesetzt und wollen dort mit einem Schnitzelrestaurant wieder neu anfangen, diesmal aber ohne zwielichtige Geschäftspraktiken. Noch in Deutschland haben Sie wichtige Dokumente archiviert und online gestellt.
 
@@ -620,7 +620,7 @@ CHAOS_SIZE = 2352004
       ...in das `#{PROJEKT_PATH}`-Verzeichnis herunter.
     },
     :enter,
-    "wget #{CHAOS_URL}",
+    "wget #{CHAOS_URL} or curl -ON #{CHAOS_URL}",
     -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
 )
 
@@ -669,9 +669,9 @@ CHAOS_TXT_FILE_COUNT = 32771
 
       Nutzen Sie `grep`, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist `#.*#`).
     },
-    'Wie lautet das magische Passwort (ohne die #)?',
-    'grep -roh "#.*#"',
-    -> () { read_console == "parmigiana4life" }
+    'Wie lautet das magische Passwort?',
+    'cd chaos; grep -roh "#.*#" .',
+    -> () { read_console == "parmigiana4life" || read_console == "#parmigiana4life#" }
 )
 
 # diff
@@ -760,7 +760,7 @@ CHAOS_TXT_FILE_COUNT = 32771
       Auf Ihrem System läut ein Prozess mit dem Namen `"sleep"`. Finden Sie ihn und _beenden Sie den Prozess_. Möglicherweise laufen auch mehrere Prozesse, dann beenden Sie alle mit dem Namen `"sleep"`.
     },
     :enter,
-    'ps aux | grep sleep ; kill ...',
+    'ps aux | grep sleep ; kill PID',
     -> () { `ps aux | grep sleep | grep -v "grep"`.strip == "" },
     -> () { p = fork { exec "sleep 100000" }; Process.detach(p) }
 )
@@ -813,7 +813,7 @@ CHAOS_TXT_FILE_COUNT = 32771
       Benutzen Sie das Kommando `du`, um herauszufinden, wie viel Platz alle Dateien im Ordner `#{PROJEKT_PATH}/chaos` zusammen verbrauchen.
     },
     'Wie viel Platz (in Megabyte) verbraucht der Ordner chaos?',
-    "du -h #{PROJEKT_PATH}/chaos",
+    'du -h #{PROJEKT_PATH}/chaos',
     -> (os) do
        # Way to determine used space is really hacky but we would like
        # to avoid pulling additional gems like sys/filesystem or similar

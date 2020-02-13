@@ -14,6 +14,7 @@ The game was tested on
   * [Ubuntu 18.04](http://releases.ubuntu.com/18.04/)
   * [Manjaro Linux 18.1](https://manjaro.org/download/)
   * MacOS 10.14 (Mojave)
+  * MacOS 10.15.3 (Catalina)
 
 ## Usage
 

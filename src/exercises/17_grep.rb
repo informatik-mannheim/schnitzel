@@ -11,7 +11,7 @@
 
       Nutzen Sie `grep`, um das Passwort zu finden. (Tipp: der richige reguläre Ausdruck ist `#.*#`).
     },
-    'Wie lautet das magische Passwort (ohne die #)?',
-    'grep -roh "#.*#"',
-    -> () { read_console == "parmigiana4life" }
+    'Wie lautet das magische Passwort?',
+    'cd chaos; grep -roh "#.*#" .',
+    -> () { read_console == "parmigiana4life" || read_console == "#parmigiana4life#" }
 )
