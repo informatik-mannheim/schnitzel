@@ -10,6 +10,7 @@ The game is based on Ruby and requires at least Ruby 2.4 to run. No additional G
 
 The game was tested on
 
+  * [Ubuntu 22.10](http://releases.ubuntu.com/22.10/)
   * [Ubuntu 19.04](http://releases.ubuntu.com/19.04/)
   * [Ubuntu 18.04](http://releases.ubuntu.com/18.04/)
   * [Manjaro Linux 18.1](https://manjaro.org/download/)
@@ -43,3 +44,4 @@ The game is developed by [Thomas Smits](https://github.com/thomsmits/).
 ## Acknowledgement
 
 This program is based on the idea of Eugen Krizki and Richard Vladimirskij and their framework [pepio](https://github.com/limecakeio/pepio). Due to the many dependencies and problems with the node.js based pepio, I decided to do a complete re-implementation and extension in Ruby. The goal was to have one single file which can be downloaded and executed easily.
+

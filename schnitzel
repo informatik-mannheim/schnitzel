@@ -607,7 +607,7 @@ end
 )
 
 # wget or curl
-CHAOS_SIZE = 2352004
+CHAOS_SIZE = 2405800
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
@@ -757,11 +757,11 @@ CHAOS_TXT_FILE_COUNT = 32771
     'Vertrauen ist nichts, Kontrolle ist alles',
     'Machen Sie sich mit der Funktionsweise "ps" und "kill" vertraut.',
     %Q{
-      Auf Ihrem System läut ein Prozess mit dem Namen `"sleep"`. Finden Sie ihn und _beenden Sie den Prozess_. Möglicherweise laufen auch mehrere Prozesse, dann beenden Sie alle mit dem Namen `"sleep"`.
+      Auf Ihrem System läut ein Prozess mit dem Namen `"sleep"`, der Ihrem Benutzer gehört. Finden Sie ihn und _beenden Sie den Prozess_. Möglicherweise laufen auch mehrere Prozesse, dann beenden Sie alle mit dem Namen `"sleep"` und Ihrem Benutzernamen.
     },
     :enter,
     'ps aux | grep sleep ; kill PID',
-    -> () { `ps aux | grep sleep | grep -v "grep"`.strip == "" },
+    -> () { `ps aux | grep sleep | grep $USER | grep -v "grep"`.strip == "" },
     -> () { p = fork { exec "sleep 100000" }; Process.detach(p) }
 )
 
@@ -776,7 +776,7 @@ CHAOS_TXT_FILE_COUNT = 32771
 
       Finden Sie mit Hilfe der _Jahresübersicht des Befehls `cal`_ heraus, welcher Monat in dem Jahr 1752 der kürzeste Monat war und zählen Sie, wiviele einzelne Tage dieser laut `cal` hatte.
     },
-    'Wie viele einzelne Tage hatte der kürzeste Monat des Jahres 1752 laut cal?',
+    'Wie viele Tage hatte der September 1752?',
     'cal 1752',
     -> () { read_console == '19' }
 )

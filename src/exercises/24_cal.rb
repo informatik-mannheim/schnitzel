@@ -9,7 +9,7 @@
 
       Finden Sie mit Hilfe der _Jahresübersicht des Befehls `cal`_ heraus, welcher Monat in dem Jahr 1752 der kürzeste Monat war und zählen Sie, wiviele einzelne Tage dieser laut `cal` hatte.
     },
-    'Wie viele einzelne Tage hatte der kürzeste Monat des Jahres 1752 laut cal?',
+    'Wie viele Tage hatte der September 1752?',
     'cal 1752',
     -> () { read_console == '19' }
 )

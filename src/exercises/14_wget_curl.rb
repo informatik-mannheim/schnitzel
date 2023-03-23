@@ -1,5 +1,5 @@
 # wget or curl
-CHAOS_SIZE = 2352004
+CHAOS_SIZE = 2405800
 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
