@@ -17,6 +17,13 @@ The game was tested on
   * MacOS 10.14 (Mojave)
   * MacOS 10.15.3 (Catalina)
 
+## Installation / Download
+
+  * Install Ruby (if not present)
+  * Download the latest release [here](https://github.com/informatik-mannheim/schnitzel/releases/tag/v1.0).
+  * Make the file executable (`chmod a+x schnitzel`)
+  * Execute it
+
 ## Usage
 
 You can directly execute the program from the `src` folder by starting the `schnitzel.rb` script. For production use, bundle all parts of the program into one single file with `bin/build.rb` and transfer the resulting file `schnitzel` to the target machine.
