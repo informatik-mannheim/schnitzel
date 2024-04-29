@@ -185,7 +185,7 @@ end
 # @param path String path to the directory
 # @param mask Integer umask to be used in creating the direcory
 def mkdir(path, mask = 0700)
-  Dir.mkdir(path, mask) unless Dir.exists?(path)
+  Dir.mkdir(path, mask) unless Dir.exist?(path)
 end
 
 ##
@@ -292,7 +292,7 @@ end
 # @return the last exercise sucessfully performed
 def next_exercise_from_log
   start = 0
-  if File.exists?(LOG_FILE)
+  if File.exist?(LOG_FILE)
     contents = File.readlines(LOG_FILE)
     start = contents.last.split("\t").first.to_i + 1
   else
@@ -307,7 +307,7 @@ end
 # @return the time obj of first run
 def get_first_starttime
   time = Time.local(1900, 1, 1)
-  if File.exists?(LOG_FILE)
+  if File.exist?(LOG_FILE)
     contents = File.readlines(LOG_FILE)
     time = Time.parse(contents.first.split("\t")[3].to_s)
   end
@@ -320,7 +320,7 @@ end
 # @return the date obj when the user finished schnitzel
 def get_end_time
   time = Time.local(1900, 1, 1)
-  if File.exists?(LOG_FILE)
+  if File.exist?(LOG_FILE)
     time = File.mtime(LOG_FILE)
   end
   time
