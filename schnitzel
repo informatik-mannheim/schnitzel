@@ -41,7 +41,7 @@ CORRECT_SOLUTION = "Korrekt."
 CORRECT_SOLUTION_PRAISES = ["Gut gemacht!", "Großartig!", "Außerordentlich gut!", "Weiter so!", "Sehr gut gemacht!", "Prima!", "Super Leistung!", "Top Leistung!", "Top!", "Wunderbar!", "Toll!", "Spitze!", "Wundervoll!", "Herausragend!", "Hervorragend!", "Toll gemacht!", "Super!" , "Einsame Spitze!", "Grandios!", "Bravo!",  "Sensationell!", "Weiter so!", "Meisterhaft!", "Spitzenmäßig!", "Stark!", "Klasse gemacht!", "Astrein!"]
 
 # Location of the prepared tar
-CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/master/chaos.tar.xz"
+CHAOS_URL = "https://github.com/informatik-mannheim/schnitzel/raw/main/chaos.tar.xz"
 
 # Message shown if all exercises were done
 WINNER_MESSAGE = %q{
