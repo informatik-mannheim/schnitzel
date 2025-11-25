@@ -9,5 +9,5 @@
     },
     :enter,
     'grep heim wortliste_sortiert.txt | sed -e "s/heim/mannheim/g" > monnheim.txt',
-    -> () { f = "#{PATH}/monnheim.txt"; File.exists?(f) && File.readlines(f).map(&:chomp) == [ 'Billigmannheim', 'Blindenmannheim', 'Gemannheimkonto', 'Saisonmannheimspiel', 'Sportlermannheim' ] }
+    -> () { f = "#{PATH}/monnheim.txt"; File.exist?(f) && File.readlines(f).map(&:chomp) == [ 'Billigmannheim', 'Blindenmannheim', 'Gemannheimkonto', 'Saisonmannheimspiel', 'Sportlermannheim' ] }
 )

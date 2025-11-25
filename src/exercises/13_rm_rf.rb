@@ -9,5 +9,5 @@
     },
     :enter,
     'rm -rf nothing-to-see-here',
-    -> () { !File.exists?("#{PATH}/nothing-to-see-here") }
+    -> () { !File.exist?("#{PATH}/nothing-to-see-here") }
 )

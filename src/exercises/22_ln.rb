@@ -11,12 +11,12 @@
     'ln highlander.txt fasil.txt',
     -> (os) do
       f = "#{PATH}/fasil.txt"
-      File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
+      File.exist?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
       if os == :linux
         `stat -c %h #{f}`.strip == "2"
       elsif os == :macos
         `stat -f %l #{f}`.strip == "2"
       end
     end,
-    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
+    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exist?(f) }
 )

@@ -421,7 +421,7 @@ end
   },
   :enter,
   'cd ; cd linux-kurs ; echo "Pulp Fiction" > film.txt',
-  -> () { f = "#{PATH}/film.txt"; File.exists?(f) && File.read(f).strip == "Pulp Fiction" },
+  -> () { f = "#{PATH}/film.txt"; File.exist?(f) && File.read(f).strip == "Pulp Fiction" },
   -> () { create_workdir }
 )
 
@@ -470,7 +470,7 @@ end
    },
    :enter,
    'mkdir tax-man; cp speisekarte.txt tax-man/',
-  -> () { File.exists?("#{PATH}/tax-man/speisekarte.txt") && File.read("#{PATH}/speisekarte.txt") == File.read("#{PATH}/tax-man/speisekarte.txt") }
+  -> () { File.exist?("#{PATH}/tax-man/speisekarte.txt") && File.read("#{PATH}/speisekarte.txt") == File.read("#{PATH}/tax-man/speisekarte.txt") }
 )
 
 # mv
@@ -486,9 +486,9 @@ end
     'mv laundry tax-man',
     -> () do
         ok = true
-        ('a'..'z').each { |l| ok = ok && File.exists?("#{PATH}/tax-man/laundry/#{l}") }
-        Dir.exists?("#{PATH}/tax-man/laundry") &&
-        !Dir.exists?("#{PATH}/laundry") && ok
+        ('a'..'z').each { |l| ok = ok && File.exist?("#{PATH}/tax-man/laundry/#{l}") }
+        Dir.exist?("#{PATH}/tax-man/laundry") &&
+        !Dir.exist?("#{PATH}/laundry") && ok
     end,
     -> () do
       mkdir("#{PATH}/laundry")
@@ -507,7 +507,7 @@ end
     },
     :enter,
     'rm speisekarte.txt',
-    -> () { !File.exists?("#{PATH}/speisekarte.txt") }
+    -> () { !File.exist?("#{PATH}/speisekarte.txt") }
 )
 
 # whoami
@@ -567,7 +567,7 @@ end
     },
     :enter,
     'sudo mv shady-business nothing-to-see-here',
-    -> () { !File.exists?("#{PATH}/shady-business") && File.exists?("#{PATH}/nothing-to-see-here") }
+    -> () { !File.exist?("#{PATH}/shady-business") && File.exist?("#{PATH}/nothing-to-see-here") }
 )
 
 # chmod
@@ -603,12 +603,14 @@ end
     },
     :enter,
     'rm -rf nothing-to-see-here',
-    -> () { !File.exists?("#{PATH}/nothing-to-see-here") }
+    -> () { !File.exist?("#{PATH}/nothing-to-see-here") }
 )
 
 # wget or curl
-CHAOS_SIZE = 2405800
+CHAOS_SIZE = 2334272
 
+puts File.exist?("#{PATH}/chaos.tar.xz")
+puts 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
     'Machen Sie sich mit der Funktionsweise von wget oder curl vertraut.',
@@ -621,11 +623,11 @@ CHAOS_SIZE = 2405800
     },
     :enter,
     "wget #{CHAOS_URL} or curl -ON #{CHAOS_URL}",
-    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
+    -> () { File.exist?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
 )
 
 # tar
-CHAOS_FILE_COUNT = 66893
+CHAOS_FILE_COUNT = 66890
 
 @exercises << Exercise.new(
     'Archive',
@@ -637,7 +639,7 @@ CHAOS_FILE_COUNT = 66893
     },
     :enter,
     'tar -xJf chaos.tar.xz',
-    -> () { Dir.exists?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == CHAOS_FILE_COUNT }
+    -> () { Dir.exist?("#{PATH}/chaos") && Dir["#{PATH}/chaos/**/*"].count == CHAOS_FILE_COUNT }
 )
 
 # find / wc
@@ -699,7 +701,7 @@ CHAOS_TXT_FILE_COUNT = 32771
     },
     :enter,
     'cd chaos; sort wortliste.txt | uniq > ../wortliste_sortiert.txt',
-    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exists?(f) && (File.readlines(f)[142].strip == 'ausbauchen' || File.readlines(f)[142].strip == 'Behelfsverkaufsstelle') }
+    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exist?(f) && (File.readlines(f)[142].strip == 'ausbauchen' || File.readlines(f)[142].strip == 'Behelfsverkaufsstelle') }
 )
 
 # grep / sed / | / >
@@ -713,7 +715,7 @@ CHAOS_TXT_FILE_COUNT = 32771
     },
     :enter,
     'grep heim wortliste_sortiert.txt | sed -e "s/heim/mannheim/g" > monnheim.txt',
-    -> () { f = "#{PATH}/monnheim.txt"; File.exists?(f) && File.readlines(f).map(&:chomp) == [ 'Billigmannheim', 'Blindenmannheim', 'Gemannheimkonto', 'Saisonmannheimspiel', 'Sportlermannheim' ] }
+    -> () { f = "#{PATH}/monnheim.txt"; File.exist?(f) && File.readlines(f).map(&:chomp) == [ 'Billigmannheim', 'Blindenmannheim', 'Gemannheimkonto', 'Saisonmannheimspiel', 'Sportlermannheim' ] }
 )
 
 # ln -s
@@ -725,8 +727,8 @@ CHAOS_TXT_FILE_COUNT = 32771
     },
     :enter,
     'ln -s highlander.txt macleod.txt',
-    -> () { f = "#{PATH}/macleod.txt"; File.exists?(f) && File.symlink?(f) },
-    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
+    -> () { f = "#{PATH}/macleod.txt"; File.exist?(f) && File.symlink?(f) },
+    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exist?(f) }
 )
 
 # ln
@@ -742,14 +744,14 @@ CHAOS_TXT_FILE_COUNT = 32771
     'ln highlander.txt fasil.txt',
     -> (os) do
       f = "#{PATH}/fasil.txt"
-      File.exists?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
+      File.exist?(f) && File.read(f).strip == "Es kann nur zwei geben!" && \
       if os == :linux
         `stat -c %h #{f}`.strip == "2"
       elsif os == :macos
         `stat -f %l #{f}`.strip == "2"
       end
     end,
-    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
+    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exist?(f) }
 )
 
 # ps / kill

@@ -9,5 +9,5 @@
     },
     :enter,
     'sudo mv shady-business nothing-to-see-here',
-    -> () { !File.exists?("#{PATH}/shady-business") && File.exists?("#{PATH}/nothing-to-see-here") }
+    -> () { !File.exist?("#{PATH}/shady-business") && File.exist?("#{PATH}/nothing-to-see-here") }
 )

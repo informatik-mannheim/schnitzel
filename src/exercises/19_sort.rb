@@ -9,5 +9,5 @@
     },
     :enter,
     'cd chaos; sort wortliste.txt | uniq > ../wortliste_sortiert.txt',
-    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exists?(f) && (File.readlines(f)[142].strip == 'ausbauchen' || File.readlines(f)[142].strip == 'Behelfsverkaufsstelle') }
+    -> () { f = "#{PATH}/wortliste_sortiert.txt"; File.exist?(f) && (File.readlines(f)[142].strip == 'ausbauchen' || File.readlines(f)[142].strip == 'Behelfsverkaufsstelle') }
 )

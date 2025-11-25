@@ -9,5 +9,5 @@
     },
     :enter,
     'rm speisekarte.txt',
-    -> () { !File.exists?("#{PATH}/speisekarte.txt") }
+    -> () { !File.exist?("#{PATH}/speisekarte.txt") }
 )

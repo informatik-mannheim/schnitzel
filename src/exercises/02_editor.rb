@@ -11,6 +11,6 @@
   },
   :enter,
   'cd ; cd linux-kurs ; echo "Pulp Fiction" > film.txt',
-  -> () { f = "#{PATH}/film.txt"; File.exists?(f) && File.read(f).strip == "Pulp Fiction" },
+  -> () { f = "#{PATH}/film.txt"; File.exist?(f) && File.read(f).strip == "Pulp Fiction" },
   -> () { create_workdir }
 )

@@ -101,7 +101,7 @@ end
 
 # Remove temporary directory if already present
 puts "Removing old tree"
-FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
+FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exist?("#{TEMP_PATH}")
 
 # Generate the files
 puts "Generating files"
@@ -131,7 +131,7 @@ real_file_size = File.size("../chaos.tar.xz")
 
 # Remove temporary files
 puts "Removing generated files"
-FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exists?("#{TEMP_PATH}")
+FileUtils.rm_rf("#{TEMP_PATH}") if Dir.exist?("#{TEMP_PATH}")
 
 # Patch the corresponding exercises regarding file size and number of files
 puts "Patching 14_wget_curl.rb"

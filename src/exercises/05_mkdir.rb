@@ -11,5 +11,5 @@
    },
    :enter,
    'mkdir tax-man; cp speisekarte.txt tax-man/',
-  -> () { File.exists?("#{PATH}/tax-man/speisekarte.txt") && File.read("#{PATH}/speisekarte.txt") == File.read("#{PATH}/tax-man/speisekarte.txt") }
+  -> () { File.exist?("#{PATH}/tax-man/speisekarte.txt") && File.read("#{PATH}/speisekarte.txt") == File.read("#{PATH}/tax-man/speisekarte.txt") }
 )

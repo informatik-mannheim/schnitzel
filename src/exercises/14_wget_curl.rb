@@ -1,6 +1,8 @@
 # wget or curl
-CHAOS_SIZE = 2405800
+CHAOS_SIZE = 2334272
 
+puts File.exist?("#{PATH}/chaos.tar.xz")
+puts 
 @exercises << Exercise.new(
     'Ein neues Kapitel',
     'Machen Sie sich mit der Funktionsweise von wget oder curl vertraut.',
@@ -13,5 +15,5 @@ CHAOS_SIZE = 2405800
     },
     :enter,
     "wget #{CHAOS_URL} or curl -ON #{CHAOS_URL}",
-    -> () { File.exists?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
+    -> () { File.exist?("#{PATH}/chaos.tar.xz") && File.size("#{PATH}/chaos.tar.xz") == CHAOS_SIZE }
 )

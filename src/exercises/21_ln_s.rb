@@ -7,6 +7,6 @@
     },
     :enter,
     'ln -s highlander.txt macleod.txt',
-    -> () { f = "#{PATH}/macleod.txt"; File.exists?(f) && File.symlink?(f) },
-    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exists?(f) }
+    -> () { f = "#{PATH}/macleod.txt"; File.exist?(f) && File.symlink?(f) },
+    -> () { f = "#{PATH}/highlander.txt"; File.write(f, "Es kann nur einen geben!\n\n") unless File.exist?(f) }
 )

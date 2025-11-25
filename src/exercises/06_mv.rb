@@ -11,9 +11,9 @@
     'mv laundry tax-man',
     -> () do
         ok = true
-        ('a'..'z').each { |l| ok = ok && File.exists?("#{PATH}/tax-man/laundry/#{l}") }
-        Dir.exists?("#{PATH}/tax-man/laundry") &&
-        !Dir.exists?("#{PATH}/laundry") && ok
+        ('a'..'z').each { |l| ok = ok && File.exist?("#{PATH}/tax-man/laundry/#{l}") }
+        Dir.exist?("#{PATH}/tax-man/laundry") &&
+        !Dir.exist?("#{PATH}/laundry") && ok
     end,
     -> () do
       mkdir("#{PATH}/laundry")
